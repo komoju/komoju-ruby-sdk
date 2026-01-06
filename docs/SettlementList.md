@@ -1,0 +1,32 @@
+# Komoju::SettlementList
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **resource** | **String** |  |  |
+| **data** | [**Array&lt;Settlement&gt;**](Settlement.md) |  |  |
+| **start_time** | **Time** |  |  |
+| **end_time** | **Time** |  |  |
+| **total** | **Integer** |  |  |
+| **page** | **Integer** |  |  |
+| **per_page** | **Integer** |  |  |
+| **last_page** | **Integer** |  |  |
+
+## Example
+
+```ruby
+require 'komoju-ruby-client'
+
+instance = Komoju::SettlementList.new(
+  resource: null,
+  data: null,
+  start_time: null,
+  end_time: null,
+  total: null,
+  page: null,
+  per_page: null,
+  last_page: null
+)
+```
+

@@ -1,0 +1,22 @@
+# Komoju::UpdatePaymentRequest
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **description** | **String** |  | [optional] |
+| **metadata** | **String** |  | [optional] |
+| **payment_details** | [**PaymentDetailsAll**](PaymentDetailsAll.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'komoju-ruby-client'
+
+instance = Komoju::UpdatePaymentRequest.new(
+  description: null,
+  metadata: null,
+  payment_details: null
+)
+```
+
