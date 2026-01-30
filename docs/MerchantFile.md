@@ -15,7 +15,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::MerchantFile.new(
   id: null,

@@ -9,7 +9,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::CustomerMetadata.new(
   order_id: null

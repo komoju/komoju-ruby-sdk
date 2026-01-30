@@ -77,7 +77,7 @@ describe 'DisbursementsApi' do
   # Lists disbursements.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @option opts [Currency] :currency 

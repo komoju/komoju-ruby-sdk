@@ -16,7 +16,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::PaymentList.new(
   resource: null,

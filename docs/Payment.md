@@ -4,43 +4,43 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  |  |
-| **resource** | **String** |  |  |
+| **id** | **String** | A unique 25-character alphanumeric payment identifier. |  |
+| **resource** | **String** | Resource name. Will always be &#x60;payment&#x60;. |  |
 | **status** | [**PaymentStatus**](PaymentStatus.md) |  |  |
-| **amount** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). |  |
-| **tax** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). |  |
+| **amount** | **Integer** | The payment amount before tax, greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
+| **tax** | **Integer** | The tax amount, greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
 | **customer** | **String** |  |  |
 | **payment_deadline** | **String** |  |  |
-| **payment_details** | **String** |  |  |
-| **payment_method_fee** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). |  |
-| **total** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). |  |
+| **payment_details** | [**ResponsePaymentDetailsAll**](ResponsePaymentDetailsAll.md) |  |  |
+| **payment_method_fee** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
+| **total** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
 | **currency** | [**Currency**](Currency.md) |  |  |
-| **description** | **String** |  |  |
-| **captured_at** | **String** |  |  |
+| **description** | **String** | A description for this payment. May be null if it&#39;s not set. |  |
+| **captured_at** | **Time** |  |  |
 | **external_order_num** | **String** |  |  |
 | **metadata** | **Object** |  |  |
-| **created_at** | **String** |  |  |
-| **amount_refunded** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). |  |
+| **created_at** | **Time** |  |  |
+| **amount_refunded** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
 | **locale** | [**Locale**](Locale.md) |  |  |
-| **session** | **String** |  |  |
+| **session** | **String** | A unique 25-character alphanumeric resource identifier. |  |
 | **customer_family_name** | **String** |  |  |
 | **customer_given_name** | **String** |  |  |
 | **mcc** | **String** |  |  |
 | **statement_descriptor** | **String** |  |  |
-| **refunds** | **Array&lt;Object&gt;** |  |  |
-| **refund_requests** | **Array&lt;Object&gt;** |  |  |
+| **refunds** | [**Array&lt;Refund&gt;**](Refund.md) | An array of refunds. Will be an empty array if there are no refunds. |  |
+| **refund_requests** | [**Array&lt;RefundRequest&gt;**](RefundRequest.md) | An array of refund requests. Will be an empty array if there are no refund requests. |  |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::Payment.new(
-  id: null,
+  id: pay3fj6nnhvws08idzacf6et8,
   resource: null,
   status: null,
-  amount: null,
-  tax: null,
+  amount: 1000,
+  tax: 0,
   customer: null,
   payment_deadline: null,
   payment_details: null,

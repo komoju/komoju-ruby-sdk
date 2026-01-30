@@ -25,7 +25,7 @@
 | **company_information_contact_phone** | **String** |  | [optional] |
 | **company_information_incorporation_certificates** | **Array&lt;String&gt;** |  | [optional] |
 | **company_information_registration_number** | **String** |  | [optional] |
-| **company_information_share_capital_amount** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). | [optional] |
+| **company_information_share_capital_amount** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). | [optional] |
 | **company_information_share_capital_currency** | [**Currency**](Currency.md) |  | [optional] |
 | **company_information_sole_proprietor_proofs** | **Array&lt;String&gt;** |  | [optional] |
 | **company_information_company_name_kana** | **String** |  | [optional] |
@@ -77,13 +77,13 @@
 | **site_information_store_building_name** | **String** |  | [optional] |
 | **site_information_store_building_name_kana** | **String** |  | [optional] |
 | **site_information_site_product_description** | **String** |  | [optional] |
-| **site_information_site_annual_sales** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). | [optional] |
+| **site_information_site_annual_sales** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). | [optional] |
 | **site_information_site_annual_sales_currency** | [**Currency**](Currency.md) |  | [optional] |
 | **site_information_site_average_transactional_value** | **String** |  | [optional] |
 | **site_information_site_average_transactional_currency** | [**Currency**](Currency.md) |  | [optional] |
-| **site_information_site_minimum_product_pricing_cents** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). | [optional] |
+| **site_information_site_minimum_product_pricing_cents** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). | [optional] |
 | **site_information_site_minimum_product_pricing_currency** | [**Currency**](Currency.md) |  | [optional] |
-| **site_information_site_maximum_product_pricing_cents** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). | [optional] |
+| **site_information_site_maximum_product_pricing_cents** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). | [optional] |
 | **site_information_site_maximum_product_pricing_currency** | [**Currency**](Currency.md) |  | [optional] |
 | **site_information_sctl_url** | **String** |  | [optional] |
 | **site_information_sales_permit_required** | **Boolean** |  | [optional] |
@@ -104,7 +104,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::LiveApplicationRequest.new(
   locale: null,

@@ -6,15 +6,17 @@
 | ---- | ---- | ----------- | ----- |
 | **currency** | [**Currency**](Currency.md) |  | [optional] |
 | **payment_details** | [**PaymentDetailsOnlyCreditCards**](PaymentDetailsOnlyCreditCards.md) |  |  |
+| **platform_details** | [**ProcessingMerchant**](ProcessingMerchant.md) |  | [optional] |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::CreateTokenRequest.new(
   currency: null,
-  payment_details: null
+  payment_details: null,
+  platform_details: null
 )
 ```
 

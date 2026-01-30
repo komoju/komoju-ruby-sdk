@@ -1,40 +1,82 @@
 # Komoju::CreateSessionRequest
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **return_url** | **String** |  | [optional] |
-| **mode** | [**SessionMode**](SessionMode.md) |  | [optional] |
-| **amount** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
-| **email** | **String** |  | [optional] |
-| **expires_in_seconds** | **Integer** | Time in seconds until the session expires after being created. The default value and upper limit are 86,400 seconds (24 hours). | [optional][default to 86400] |
-| **external_customer_id** | **String** |  | [optional] |
-| **payment_types** | [**Array&lt;PaymentType&gt;**](PaymentType.md) |  | [optional] |
-| **default_locale** | [**Locale**](Locale.md) |  | [optional] |
-| **line_items** | [**Array&lt;LineItem&gt;**](LineItem.md) |  | [optional] |
-| **payment_data** | [**PaymentData**](PaymentData.md) |  | [optional] |
-| **customer_id** | **String** |  | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
-instance = Komoju::CreateSessionRequest.new(
-  return_url: null,
-  mode: null,
-  amount: null,
-  currency: null,
-  email: null,
-  expires_in_seconds: null,
-  external_customer_id: null,
-  payment_types: null,
-  default_locale: null,
-  line_items: null,
-  payment_data: null,
-  customer_id: null
-)
+Komoju::CreateSessionRequest.openapi_one_of
+# =>
+# [
+#   :'CreateSessionRequestWithCustomerMode',
+#   :'CreateSessionRequestWithCustomerPaymentMode',
+#   :'CreateSessionRequestWithPaymentMode'
+# ]
 ```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's property name.
+
+#### Example
+
+```ruby
+require 'komoju-ruby-sdk'
+
+Komoju::CreateSessionRequest.openapi_discriminator_name
+# => :'mode'
+```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's mapping.
+
+#### Example
+
+```ruby
+require 'komoju-ruby-sdk'
+
+Komoju::CreateSessionRequest.openapi_discriminator_mapping
+# =>
+# {
+#   :'customer' => :'CreateSessionRequestWithCustomerMode',
+#   :'customer_payment' => :'CreateSessionRequestWithCustomerPaymentMode',
+#   :'payment' => :'CreateSessionRequestWithPaymentMode'
+# }
+```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'komoju-ruby-sdk'
+
+Komoju::CreateSessionRequest.build(data)
+# => #<CreateSessionRequestWithCustomerMode:0x00007fdd4aab02a0>
+
+Komoju::CreateSessionRequest.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `CreateSessionRequestWithCustomerMode`
+- `CreateSessionRequestWithCustomerPaymentMode`
+- `CreateSessionRequestWithPaymentMode`
+- `nil` (if no type matches)
 

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **capture** | **String** |  |  |
-| **amount** | **Integer** | Must be equal or greater than 0. Always in lowest denomination of the currency (e.g. cents for USD). |  |
+| **amount** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
 | **currency** | [**Currency**](Currency.md) |  |  |
 | **external_order_num** | **String** |  |  |
 | **name** | **String** |  |  |
@@ -18,7 +18,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::PaymentData.new(
   capture: null,

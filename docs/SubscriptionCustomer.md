@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **Integer** |  |  |
-| **uuid** | **String** |  |  |
+| **uuid** | **String** | A unique 25-character alphanumeric resource identifier. |  |
 | **merchant_id** | **Integer** |  |  |
 | **created_at** | **Time** |  |  |
 | **updated_at** | **Time** |  |  |
@@ -15,7 +15,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::SubscriptionCustomer.new(
   id: null,

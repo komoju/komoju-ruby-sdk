@@ -5,32 +5,16 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **currency** | [**Currency**](Currency.md) |  |  |
-| **payment_total** | **String** |  |  |
-| **fund_transfer_total** | **String** |  |  |
-| **payment_fee_total** | **String** |  |  |
-| **refund_total** | **String** |  |  |
-| **refund_fee_total** | **String** |  |  |
-| **refunded_customer_fee_total** | **String** |  |  |
-| **correction_total** | **String** |  |  |
-| **tax_total** | **String** |  |  |
-| **balance_total** | **String** |  |  |
+| **total_balance_cents** | **Integer** | Amount in the lowest denomination of the currency (e.g. cents for USD). |  |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::Balance.new(
   currency: null,
-  payment_total: null,
-  fund_transfer_total: null,
-  payment_fee_total: null,
-  refund_total: null,
-  refund_fee_total: null,
-  refunded_customer_fee_total: null,
-  correction_total: null,
-  tax_total: null,
-  balance_total: null
+  total_balance_cents: null
 )
 ```
 

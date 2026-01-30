@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::PaySessionRequest.new(
   capture: null,

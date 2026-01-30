@@ -85,7 +85,7 @@ describe 'SubscriptionsApi' do
   # Retrieves a paginated list of all previously-registered customers.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @option opts [String] :expiration The expiration of the customer&#39;s credit card in MMYY format.
@@ -101,7 +101,7 @@ describe 'SubscriptionsApi' do
   # List existing subscriptions.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @return [SubscriptionList]

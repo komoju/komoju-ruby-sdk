@@ -4,15 +4,15 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **merchant_id** | **String** |  |  |
+| **paper** | **String** | Must be only one file. |  |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::CreateFileRequest.new(
-  merchant_id: null
+  paper: null
 )
 ```
 

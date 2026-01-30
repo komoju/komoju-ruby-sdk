@@ -67,7 +67,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::UpdatePaymentMethodRequest.new(
   locale: null,

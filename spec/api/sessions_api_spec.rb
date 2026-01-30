@@ -46,7 +46,7 @@ describe 'SessionsApi' do
 
   # unit tests for create_session
   # Session: Create
-  # Creates a session.
+  # Creates a session. There&#39;re 3 modes for the session:  * &#x60;payment&#x60;: A payment will be created after user completed the session (default). * &#x60;customer&#x60;: A customer will be created instead of a payment, or updated if &#x60;customer_id&#x60; is given. This customer resource can then be used to perform delayed billing or subscriptions. * &#x60;customer_payment&#x60;: A payment will be created, and customer will be created or updated. You can use this mode to charge money upfront and save customer&#39;s payment details in one go.
   # @param create_session_request 
   # @param [Hash] opts the optional parameters
   # @return [Session]

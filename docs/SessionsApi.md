@@ -22,7 +22,7 @@ Cancels a session.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -86,13 +86,13 @@ end
 
 Session: Create
 
-Creates a session.
+Creates a session. There're 3 modes for the session:  * `payment`: A payment will be created after user completed the session (default). * `customer`: A customer will be created instead of a payment, or updated if `customer_id` is given. This customer resource can then be used to perform delayed billing or subscriptions. * `customer_payment`: A payment will be created, and customer will be created or updated. You can use this mode to charge money upfront and save customer's payment details in one go.
 
 ### Examples
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -101,7 +101,7 @@ Komoju.configure do |config|
 end
 
 api_instance = Komoju::SessionsApi.new
-create_session_request = Komoju::CreateSessionRequest.new # CreateSessionRequest | 
+create_session_request = Komoju::CreateSessionRequestWithCustomerMode.new({mode: 'customer', amount: 1000, currency: Komoju::Currency::JPY}) # CreateSessionRequest | 
 
 begin
   # Session: Create
@@ -162,7 +162,7 @@ Provide customer payment details to pay for a session.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -234,7 +234,7 @@ Retrieves a Session given its ID.  A Session's status changes when the user comp
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key

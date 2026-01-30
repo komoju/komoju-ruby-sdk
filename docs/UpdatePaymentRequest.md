@@ -5,13 +5,13 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **description** | **String** |  | [optional] |
-| **metadata** | **String** |  | [optional] |
+| **metadata** | **Object** |  | [optional] |
 | **payment_details** | [**PaymentDetailsAll**](PaymentDetailsAll.md) |  | [optional] |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::UpdatePaymentRequest.new(
   description: null,

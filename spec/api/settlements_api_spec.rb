@@ -37,7 +37,7 @@ describe 'SettlementsApi' do
   # 
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @return [SettlementList]
@@ -52,7 +52,7 @@ describe 'SettlementsApi' do
   # 
   # @param id 
   # @param [Hash] opts the optional parameters
-  # @return [Settlement]
+  # @return [SettlementShow]
   describe 'show_settlement test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

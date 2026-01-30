@@ -7,11 +7,11 @@ All URIs are relative to *https://komoju.com/api/v1*
 | [**cancel_payment**](PaymentsApi.md#cancel_payment) | **POST** /payments/{id}/cancel | Payment: Cancel |
 | [**capture_payment**](PaymentsApi.md#capture_payment) | **POST** /payments/{id}/capture | Payment: Capture |
 | [**create_payment**](PaymentsApi.md#create_payment) | **POST** /payments | Payment: Create |
+| [**create_refund_request**](PaymentsApi.md#create_refund_request) | **POST** /payments/{id}/refund_request | Payment: Refund Request |
 | [**finalize_payment**](PaymentsApi.md#finalize_payment) | **POST** /payments/{id}/finalize | Payment: Finalize |
 | [**list_payment_methods**](PaymentsApi.md#list_payment_methods) | **GET** /payment_methods | Payment Method: List |
 | [**list_payments**](PaymentsApi.md#list_payments) | **GET** /payments | Payment: List |
 | [**refund_payment**](PaymentsApi.md#refund_payment) | **POST** /payments/{id}/refund | Payment: Refund |
-| [**refund_request**](PaymentsApi.md#refund_request) | **POST** /payments/{id}/refund_request | Payment: Refund Request |
 | [**show_payment**](PaymentsApi.md#show_payment) | **GET** /payments/{id} | Payment: Show |
 | [**update_payment**](PaymentsApi.md#update_payment) | **PATCH** /payments/{id} | Payment: Update |
 
@@ -28,7 +28,7 @@ Cancels a payment.  The given payment must have a state of `pending` or `authori
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -92,13 +92,13 @@ end
 
 Payment: Capture
 
-Captures a payment.  Only works on payments with a `payment_type` of `\"credit_card\"`.
+Captures a payment.  Only works when the payment was created with `capture` set to false, or via a session with `capture` set to `\"manual\"`.
 
 ### Examples
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -164,13 +164,13 @@ end
 
 Payment: Create
 
-Creates a payment for a given `amount` and `currency`.  Must specify exactly one of `payment_details` or `customer`.
+Creates a payment for a given `amount` and `currency`.  There are two ways to create payment:  - For one-time payment, you can pass `payment_details` with payment method type and additional attributes. - For recurring payment, you can pass customer's ID via `customer` attribute. Customer's saved payment method will be used for the payment.  Note that either `payment_details` or `customer` is required for the payment. However, both of them should not be given at the same time.
 
 ### Examples
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -179,7 +179,7 @@ Komoju.configure do |config|
 end
 
 api_instance = Komoju::PaymentsApi.new
-create_payment_request = Komoju::CreatePaymentRequest.new({amount: 37, currency: Komoju::Currency::JPY}) # CreatePaymentRequest | 
+create_payment_request = Komoju::CreatePaymentRequestWithCustomer.new({amount: 1000, currency: Komoju::Currency::JPY, customer: 'cust14ur4hvws08idzacf6et8'}) # CreatePaymentRequest | 
 
 begin
   # Payment: Create
@@ -228,6 +228,77 @@ end
 - **Accept**: application/json
 
 
+## create_refund_request
+
+> create_refund_request(id, create_refund_request_request)
+
+Payment: Refund Request
+
+A \"Refund Request\" requests that a payment be refunded manually. This can be used for payment methods that do not support refunds, such as konbini. To support non-refundable payment methods, a bank account must be specified so that we know where to send the funds. Since it is a manual process, the refund will be carried out at a later date, and there's a possibility of it being rejected.
+
+### Examples
+
+```ruby
+require 'time'
+require 'komoju-ruby-sdk'
+# setup authorization
+Komoju.configure do |config|
+  # Configure HTTP basic authorization: api_key
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = Komoju::PaymentsApi.new
+id = 'id_example' # String | A unique identifier for the payment.
+create_refund_request_request = Komoju::CreateRefundRequestRequest.new({amount: 1000, customer_name: 'customer_name_example', bank_name: 'bank_name_example', branch_number: 'branch_number_example', account_type: 'normal', account_number: 37, include_payment_method_fee: false}) # CreateRefundRequestRequest | 
+
+begin
+  # Payment: Refund Request
+  api_instance.create_refund_request(id, create_refund_request_request)
+rescue Komoju::ApiError => e
+  puts "Error when calling PaymentsApi->create_refund_request: #{e}"
+end
+```
+
+#### Using the create_refund_request_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> create_refund_request_with_http_info(id, create_refund_request_request)
+
+```ruby
+begin
+  # Payment: Refund Request
+  data, status_code, headers = api_instance.create_refund_request_with_http_info(id, create_refund_request_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Komoju::ApiError => e
+  puts "Error when calling PaymentsApi->create_refund_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | A unique identifier for the payment. |  |
+| **create_refund_request_request** | [**CreateRefundRequestRequest**](CreateRefundRequestRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## finalize_payment
 
 > <Payment> finalize_payment(id, finalize_payment_request)
@@ -240,7 +311,7 @@ Payment: Finalize
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -302,7 +373,7 @@ end
 
 ## list_payment_methods
 
-> list_payment_methods
+> <Array<AvailablePaymentMethod>> list_payment_methods
 
 Payment Method: List
 
@@ -312,7 +383,7 @@ Lists available payment methods.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -324,7 +395,8 @@ api_instance = Komoju::PaymentsApi.new
 
 begin
   # Payment Method: List
-  api_instance.list_payment_methods
+  result = api_instance.list_payment_methods
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PaymentsApi->list_payment_methods: #{e}"
 end
@@ -332,9 +404,9 @@ end
 
 #### Using the list_payment_methods_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> list_payment_methods_with_http_info
+> <Array(<Array<AvailablePaymentMethod>>, Integer, Hash)> list_payment_methods_with_http_info
 
 ```ruby
 begin
@@ -342,7 +414,7 @@ begin
   data, status_code, headers = api_instance.list_payment_methods_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <Array<AvailablePaymentMethod>>
 rescue Komoju::ApiError => e
   puts "Error when calling PaymentsApi->list_payment_methods_with_http_info: #{e}"
 end
@@ -354,7 +426,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-nil (empty response body)
+[**Array&lt;AvailablePaymentMethod&gt;**](AvailablePaymentMethod.md)
 
 ### Authorization
 
@@ -363,7 +435,7 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## list_payments
@@ -378,7 +450,7 @@ Retrieves a paginated list of payments. Pagination can be configured with `page`
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -389,13 +461,13 @@ end
 api_instance = Komoju::PaymentsApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56, # Integer | Page number to query for.
   merchant_id: 'merchant_id_example', # String | 
   currency: Komoju::Currency::JPY, # Currency | 
   external_order_num: 'external_order_num_example', # String | A unique ID from your application used to track this payment.
-  status: Komoju::PaymentStatus::PENDING # PaymentStatus | The status of the payment.
+  status: 'pending,captured' # String | The status of the payment. Can be a single status or comma-separated values.
 }
 
 begin
@@ -430,13 +502,13 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 | **merchant_id** | **String** |  | [optional] |
 | **currency** | [**Currency**](.md) |  | [optional] |
 | **external_order_num** | **String** | A unique ID from your application used to track this payment. | [optional] |
-| **status** | [**PaymentStatus**](.md) | The status of the payment. | [optional] |
+| **status** | **String** | The status of the payment. Can be a single status or comma-separated values. | [optional] |
 
 ### Return type
 
@@ -464,7 +536,7 @@ Refunds an arbitrary amount of money from an existing payment. If no amount is s
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -524,77 +596,6 @@ end
 - **Accept**: application/json
 
 
-## refund_request
-
-> refund_request(id, refund_request_request)
-
-Payment: Refund Request
-
-A \"Refund Request\" requests that a payment be refunded manually. This can be used for payment methods that do not support refunds, such as konbini. To support non-refundable payment methods, a bank account must be specified so that we know where to send the funds. Since it is a manual process, the refund will be carried out at a later date, and there's a possibility of it being rejected.
-
-### Examples
-
-```ruby
-require 'time'
-require 'komoju-ruby-client'
-# setup authorization
-Komoju.configure do |config|
-  # Configure HTTP basic authorization: api_key
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
-
-api_instance = Komoju::PaymentsApi.new
-id = 'id_example' # String | A unique identifier for the payment.
-refund_request_request = Komoju::RefundRequestRequest.new({amount: 37, customer_name: 'customer_name_example', bank_name: 'bank_name_example', branch_number: 'branch_number_example', account_type: 'normal', account_number: 37, include_payment_method_fee: false}) # RefundRequestRequest | 
-
-begin
-  # Payment: Refund Request
-  api_instance.refund_request(id, refund_request_request)
-rescue Komoju::ApiError => e
-  puts "Error when calling PaymentsApi->refund_request: #{e}"
-end
-```
-
-#### Using the refund_request_with_http_info variant
-
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
-
-> <Array(nil, Integer, Hash)> refund_request_with_http_info(id, refund_request_request)
-
-```ruby
-begin
-  # Payment: Refund Request
-  data, status_code, headers = api_instance.refund_request_with_http_info(id, refund_request_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => nil
-rescue Komoju::ApiError => e
-  puts "Error when calling PaymentsApi->refund_request_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | A unique identifier for the payment. |  |
-| **refund_request_request** | [**RefundRequestRequest**](RefundRequestRequest.md) |  |  |
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## show_payment
 
 > <Payment> show_payment(id)
@@ -607,7 +608,7 @@ Retrieves a single payment object by its `id`.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -677,7 +678,7 @@ Updates a payment.  Only a payment's `description` and `metadata` can be changed
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key

@@ -4,17 +4,17 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **processing_merchant_id** | **String** |  |  |
 | **submerchants** | [**Array&lt;Submerchant&gt;**](Submerchant.md) |  |  |
+| **processing_merchant_id** | **String** | A unique 25-character alphanumeric resource identifier. |  |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::PlatformDetails.new(
-  processing_merchant_id: null,
-  submerchants: null
+  submerchants: null,
+  processing_merchant_id: null
 )
 ```
 

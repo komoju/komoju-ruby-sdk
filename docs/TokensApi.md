@@ -19,7 +19,7 @@ Creates a token with the given `payment_details`.  It is recommended to have a c
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -28,7 +28,7 @@ Komoju.configure do |config|
 end
 
 api_instance = Komoju::TokensApi.new
-create_token_request = Komoju::CreateTokenRequest.new({payment_details: Komoju::PaymentDetailsCreditCard.new({type: 'credit_card', number: 'number_example', month: 37, year: 37})}) # CreateTokenRequest | 
+create_token_request = Komoju::CreateTokenRequest.new({payment_details: Komoju::PaymentDetailsCreditCard.new({type: 'credit_card', number: '4111111111111111', month: 10, year: 2031})}) # CreateTokenRequest | 
 
 begin
   # Token: Create

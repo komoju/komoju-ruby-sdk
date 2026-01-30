@@ -9,7 +9,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::CancelDisbursementRequest.new(
   cancel_reason: null

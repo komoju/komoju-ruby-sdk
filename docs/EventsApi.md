@@ -20,7 +20,7 @@ Lists out past webhook events from most-recent to least-recent.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -31,7 +31,7 @@ end
 api_instance = Komoju::EventsApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56 # Integer | Page number to query for.
 }
@@ -68,7 +68,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 
@@ -98,7 +98,7 @@ View an event given an `id`. Event `id`s can be saved from a webhook or found by
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key

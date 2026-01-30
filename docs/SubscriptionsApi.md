@@ -27,7 +27,7 @@ Creates a new customer with the specified `payment_details`. Customer payment de
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -97,7 +97,7 @@ Create a new subscription. A subscription represents a recurring payment. Recurr
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -106,7 +106,7 @@ Komoju.configure do |config|
 end
 
 api_instance = Komoju::SubscriptionsApi.new
-create_subscription_request = Komoju::CreateSubscriptionRequest.new({customer: 'customer_example', amount: 37, currency: Komoju::Currency::JPY, period: Komoju::SubscriptionPeriod::WEEKLY, metadata: 'metadata_example'}) # CreateSubscriptionRequest | 
+create_subscription_request = Komoju::CreateSubscriptionRequest.new({customer: 'customer_example', amount: 37, currency: Komoju::Currency::JPY, period: Komoju::SubscriptionPeriod::WEEKLY}) # CreateSubscriptionRequest | 
 
 begin
   # Subscription: Create
@@ -167,7 +167,7 @@ Deletes the customer with the given `id`. This complete erases the stored paymen
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -237,7 +237,7 @@ Delete a subscription. Once deleted, the subscription's regular payments will st
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -307,7 +307,7 @@ Retrieves a paginated list of all previously-registered customers.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -318,7 +318,7 @@ end
 api_instance = Komoju::SubscriptionsApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56, # Integer | Page number to query for.
   expiration: 'expiration_example' # String | The expiration of the customer's credit card in MMYY format.
@@ -356,7 +356,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 | **expiration** | **String** | The expiration of the customer&#39;s credit card in MMYY format. | [optional] |
@@ -387,7 +387,7 @@ List existing subscriptions.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -398,7 +398,7 @@ end
 api_instance = Komoju::SubscriptionsApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56 # Integer | Page number to query for.
 }
@@ -435,7 +435,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 
@@ -465,7 +465,7 @@ Retrieves customer personal information.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -535,7 +535,7 @@ Show an existing subscription, including its customer and scrubbed payment detai
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -605,7 +605,7 @@ Updates the customer with the given `id`. A new set of `payment_details` may be 
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key

@@ -9,7 +9,7 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 Komoju::PaymentDetailsAll.openapi_one_of
 # =>
@@ -20,6 +20,7 @@ Komoju::PaymentDetailsAll.openapi_one_of
 #   :'PaymentDetailsAupay',
 #   :'PaymentDetailsBancontact',
 #   :'PaymentDetailsBankTransfer',
+#   :'PaymentDetailsBitCash',
 #   :'PaymentDetailsBlik',
 #   :'PaymentDetailsCVS',
 #   :'PaymentDetailsCreditCard',
@@ -41,16 +42,16 @@ Komoju::PaymentDetailsAll.openapi_one_of
 #   :'PaymentDetailsGrabpayotp',
 #   :'PaymentDetailsHappyMoney',
 #   :'PaymentDetailsIdeal',
-#   :'PaymentDetailsJapanMobile',
 #   :'PaymentDetailsKakaopay',
-#   :'PaymentDetailsKomojuPay',
 #   :'PaymentDetailsKonbini',
 #   :'PaymentDetailsMerpay',
 #   :'PaymentDetailsMobile',
+#   :'PaymentDetailsMobileJapan',
 #   :'PaymentDetailsMultibanco',
 #   :'PaymentDetailsMybank',
 #   :'PaymentDetailsNarvesen',
 #   :'PaymentDetailsNaverpay',
+#   :'PaymentDetailsNetCash',
 #   :'PaymentDetailsOvo',
 #   :'PaymentDetailsPaidy',
 #   :'PaymentDetailsPayEasy',
@@ -69,7 +70,6 @@ Komoju::PaymentDetailsAll.openapi_one_of
 #   :'PaymentDetailsSepaTransfer',
 #   :'PaymentDetailsSofortbanking',
 #   :'PaymentDetailsSoftbank',
-#   :'PaymentDetailsSteamPrepaidCard',
 #   :'PaymentDetailsTNG',
 #   :'PaymentDetailsToss',
 #   :'PaymentDetailsTruemoney',
@@ -86,7 +86,7 @@ Returns the discriminator's property name.
 #### Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 Komoju::PaymentDetailsAll.openapi_discriminator_name
 # => :'type'
@@ -99,7 +99,7 @@ Returns the discriminator's mapping.
 #### Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 Komoju::PaymentDetailsAll.openapi_discriminator_mapping
 # =>
@@ -110,6 +110,7 @@ Komoju::PaymentDetailsAll.openapi_discriminator_mapping
 #   :'aupay' => :'PaymentDetailsAupay',
 #   :'bancontact' => :'PaymentDetailsBancontact',
 #   :'bank_transfer' => :'PaymentDetailsBankTransfer',
+#   :'bit_cash' => :'PaymentDetailsBitCash',
 #   :'blik' => :'PaymentDetailsBlik',
 #   :'credit_card' => :'PaymentDetailsCreditCard',
 #   :'credit_card_brazil' => :'PaymentDetailsCreditCardBrazil',
@@ -131,9 +132,8 @@ Komoju::PaymentDetailsAll.openapi_discriminator_mapping
 #   :'grabpayotp' => :'PaymentDetailsGrabpayotp',
 #   :'happy_money' => :'PaymentDetailsHappyMoney',
 #   :'ideal' => :'PaymentDetailsIdeal',
-#   :'japan_mobile' => :'PaymentDetailsJapanMobile',
+#   :'japan_mobile' => :'PaymentDetailsMobileJapan',
 #   :'kakaopay' => :'PaymentDetailsKakaopay',
-#   :'komoju_pay' => :'PaymentDetailsKomojuPay',
 #   :'konbini' => :'PaymentDetailsKonbini',
 #   :'merpay' => :'PaymentDetailsMerpay',
 #   :'mobile' => :'PaymentDetailsMobile',
@@ -141,6 +141,7 @@ Komoju::PaymentDetailsAll.openapi_discriminator_mapping
 #   :'mybank' => :'PaymentDetailsMybank',
 #   :'narvesen' => :'PaymentDetailsNarvesen',
 #   :'naverpay' => :'PaymentDetailsNaverpay',
+#   :'net_cash' => :'PaymentDetailsNetCash',
 #   :'ovo' => :'PaymentDetailsOvo',
 #   :'paidy' => :'PaymentDetailsPaidy',
 #   :'pay_easy' => :'PaymentDetailsPayEasy',
@@ -159,7 +160,6 @@ Komoju::PaymentDetailsAll.openapi_discriminator_mapping
 #   :'sepa_transfer' => :'PaymentDetailsSepaTransfer',
 #   :'sofortbanking' => :'PaymentDetailsSofortbanking',
 #   :'softbank' => :'PaymentDetailsSoftbank',
-#   :'steam_prepaid_card' => :'PaymentDetailsSteamPrepaidCard',
 #   :'tng' => :'PaymentDetailsTNG',
 #   :'toss' => :'PaymentDetailsToss',
 #   :'truemoney' => :'PaymentDetailsTruemoney',
@@ -176,7 +176,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 Komoju::PaymentDetailsAll.build(data)
 # => #<PaymentDetailsAU:0x00007fdd4aab02a0>
@@ -199,6 +199,7 @@ Komoju::PaymentDetailsAll.build(data_that_doesnt_match)
 - `PaymentDetailsAupay`
 - `PaymentDetailsBancontact`
 - `PaymentDetailsBankTransfer`
+- `PaymentDetailsBitCash`
 - `PaymentDetailsBlik`
 - `PaymentDetailsCVS`
 - `PaymentDetailsCreditCard`
@@ -220,16 +221,16 @@ Komoju::PaymentDetailsAll.build(data_that_doesnt_match)
 - `PaymentDetailsGrabpayotp`
 - `PaymentDetailsHappyMoney`
 - `PaymentDetailsIdeal`
-- `PaymentDetailsJapanMobile`
 - `PaymentDetailsKakaopay`
-- `PaymentDetailsKomojuPay`
 - `PaymentDetailsKonbini`
 - `PaymentDetailsMerpay`
 - `PaymentDetailsMobile`
+- `PaymentDetailsMobileJapan`
 - `PaymentDetailsMultibanco`
 - `PaymentDetailsMybank`
 - `PaymentDetailsNarvesen`
 - `PaymentDetailsNaverpay`
+- `PaymentDetailsNetCash`
 - `PaymentDetailsOvo`
 - `PaymentDetailsPaidy`
 - `PaymentDetailsPayEasy`
@@ -248,7 +249,6 @@ Komoju::PaymentDetailsAll.build(data_that_doesnt_match)
 - `PaymentDetailsSepaTransfer`
 - `PaymentDetailsSofortbanking`
 - `PaymentDetailsSoftbank`
-- `PaymentDetailsSteamPrepaidCard`
 - `PaymentDetailsTNG`
 - `PaymentDetailsToss`
 - `PaymentDetailsTruemoney`

@@ -46,7 +46,7 @@ describe 'PaymentsApi' do
 
   # unit tests for capture_payment
   # Payment: Capture
-  # Captures a payment.  Only works on payments with a &#x60;payment_type&#x60; of &#x60;\&quot;credit_card\&quot;&#x60;.
+  # Captures a payment.  Only works when the payment was created with &#x60;capture&#x60; set to false, or via a session with &#x60;capture&#x60; set to &#x60;\&quot;manual\&quot;&#x60;.
   # @param id A unique identifier for the payment.
   # @param capture_payment_request 
   # @param [Hash] opts the optional parameters
@@ -59,11 +59,24 @@ describe 'PaymentsApi' do
 
   # unit tests for create_payment
   # Payment: Create
-  # Creates a payment for a given &#x60;amount&#x60; and &#x60;currency&#x60;.  Must specify exactly one of &#x60;payment_details&#x60; or &#x60;customer&#x60;.
+  # Creates a payment for a given &#x60;amount&#x60; and &#x60;currency&#x60;.  There are two ways to create payment:  - For one-time payment, you can pass &#x60;payment_details&#x60; with payment method type and additional attributes. - For recurring payment, you can pass customer&#39;s ID via &#x60;customer&#x60; attribute. Customer&#39;s saved payment method will be used for the payment.  Note that either &#x60;payment_details&#x60; or &#x60;customer&#x60; is required for the payment. However, both of them should not be given at the same time.
   # @param create_payment_request 
   # @param [Hash] opts the optional parameters
   # @return [Payment]
   describe 'create_payment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_refund_request
+  # Payment: Refund Request
+  # A \&quot;Refund Request\&quot; requests that a payment be refunded manually. This can be used for payment methods that do not support refunds, such as konbini. To support non-refundable payment methods, a bank account must be specified so that we know where to send the funds. Since it is a manual process, the refund will be carried out at a later date, and there&#39;s a possibility of it being rejected.
+  # @param id A unique identifier for the payment.
+  # @param create_refund_request_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'create_refund_request test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -86,7 +99,7 @@ describe 'PaymentsApi' do
   # Payment Method: List
   # Lists available payment methods.
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [Array<AvailablePaymentMethod>]
   describe 'list_payment_methods test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -98,13 +111,13 @@ describe 'PaymentsApi' do
   # Retrieves a paginated list of payments. Pagination can be configured with &#x60;page&#x60; and &#x60;per_page&#x60; parameters.  Payments can be filtered by &#x60;currency&#x60;, &#x60;external_order_num&#x60;, and &#x60;status&#x60;.  A time range can be specified with &#x60;start_time&#x60;, and &#x60;end_time&#x60;.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @option opts [String] :merchant_id 
   # @option opts [Currency] :currency 
   # @option opts [String] :external_order_num A unique ID from your application used to track this payment.
-  # @option opts [PaymentStatus] :status The status of the payment.
+  # @option opts [String] :status The status of the payment. Can be a single status or comma-separated values.
   # @return [PaymentList]
   describe 'list_payments test' do
     it 'should work' do
@@ -120,19 +133,6 @@ describe 'PaymentsApi' do
   # @param [Hash] opts the optional parameters
   # @return [Payment]
   describe 'refund_payment test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for refund_request
-  # Payment: Refund Request
-  # A \&quot;Refund Request\&quot; requests that a payment be refunded manually. This can be used for payment methods that do not support refunds, such as konbini. To support non-refundable payment methods, a bank account must be specified so that we know where to send the funds. Since it is a manual process, the refund will be carried out at a later date, and there&#39;s a possibility of it being rejected.
-  # @param id A unique identifier for the payment.
-  # @param refund_request_request 
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'refund_request test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

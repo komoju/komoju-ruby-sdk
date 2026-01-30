@@ -24,7 +24,7 @@ Settlement: Index
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -35,7 +35,7 @@ end
 api_instance = Komoju::SettlementsApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56 # Integer | Page number to query for.
 }
@@ -72,7 +72,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 
@@ -92,7 +92,7 @@ end
 
 ## show_settlement
 
-> <Settlement> show_settlement(id)
+> <SettlementShow> show_settlement(id)
 
 Settlement: Show
 
@@ -102,7 +102,7 @@ Settlement: Show
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -126,7 +126,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Settlement>, Integer, Hash)> show_settlement_with_http_info(id)
+> <Array(<SettlementShow>, Integer, Hash)> show_settlement_with_http_info(id)
 
 ```ruby
 begin
@@ -134,7 +134,7 @@ begin
   data, status_code, headers = api_instance.show_settlement_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Settlement>
+  p data # => <SettlementShow>
 rescue Komoju::ApiError => e
   puts "Error when calling SettlementsApi->show_settlement_with_http_info: #{e}"
 end
@@ -148,7 +148,7 @@ end
 
 ### Return type
 
-[**Settlement**](Settlement.md)
+[**SettlementShow**](SettlementShow.md)
 
 ### Authorization
 
@@ -172,7 +172,7 @@ Retrieves the settlement in CSV format.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -241,7 +241,7 @@ Retrieves the settlement in PDF format.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -310,7 +310,7 @@ Retrieves the settlement in XLS format.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -379,7 +379,7 @@ Balance: Transaction
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key

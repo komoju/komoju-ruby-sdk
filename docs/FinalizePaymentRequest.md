@@ -8,12 +8,12 @@
 | **ac_type** | **String** |  |  |
 | **field55** | **String** |  |  |
 | **track2** | **String** |  |  |
-| **metadata** | **String** |  | [optional] |
+| **metadata** | **Object** |  | [optional] |
 
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::FinalizePaymentRequest.new(
   capture: null,

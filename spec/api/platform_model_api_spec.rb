@@ -63,7 +63,7 @@ describe 'PlatformModelApi' do
   # Creates a new merchant.
   # @param create_merchant_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [SerializedSubmerchant]
   describe 'create_merchant test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -77,7 +77,7 @@ describe 'PlatformModelApi' do
   # @param currency 
   # @param create_merchant_balance_transfer_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [BalanceTransferServiceRecord]
   describe 'create_merchant_balance_transfer test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -91,7 +91,7 @@ describe 'PlatformModelApi' do
   # @param currency 
   # @param edit_merchant_balance_settings_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [MerchantBalance]
   describe 'edit_merchant_balance_settings test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -104,7 +104,7 @@ describe 'PlatformModelApi' do
   # @param merchant_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Locale] :locale 
-  # @return [nil]
+  # @return [PaymentMethodsList]
   describe 'list_live_application_payment_methods test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -116,15 +116,15 @@ describe 'PlatformModelApi' do
   # Sub-merchants List
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @option opts [Boolean] :live 
   # @option opts [MerchantRole] :platform_role 
-  # @option opts [String] :application_status 
+  # @option opts [String] :status 
   # @option opts [Boolean] :payments_enabled 
   # @option opts [Boolean] :payouts_enabled 
-  # @return [nil]
+  # @return [SubmerchantsList]
   describe 'list_merchants test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -137,13 +137,13 @@ describe 'PlatformModelApi' do
   # @param merchant_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @option opts [Currency] :currency 
   # @option opts [String] :external_order_num 
   # @option opts [PaymentStatus] :status 
-  # @return [nil]
+  # @return [PlatformMerchantPaymentList]
   describe 'list_submerchant_payments test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -164,12 +164,12 @@ describe 'PlatformModelApi' do
 
   # unit tests for merchant_balance_transactions
   # Balance: Transactions
-  # Given a currency, view the ledger transactions of the currently authenticated merchant or one of its sub-merchants.
+  # Given a currency, view the ledger transactions of the currently authenticated merchant or one of its sub-merchants. Will split ledger transactions into line items when appropriate.
   # @param merchant_id 
   # @param currency 
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :start_time Query for records created after this time.
-  # @option opts [Time] :end_time Query for records before after this time.
+  # @option opts [Time] :end_time Query for records created before this time.
   # @option opts [Integer] :per_page How many objects per page.
   # @option opts [Integer] :page Page number to query for.
   # @option opts [String] :type 
@@ -199,7 +199,7 @@ describe 'PlatformModelApi' do
   # @param merchant_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Locale] :locale 
-  # @return [LiveApplication]
+  # @return [LiveApplicationWithSubmittedFields]
   describe 'show_live_application test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -213,7 +213,7 @@ describe 'PlatformModelApi' do
   # @param payment_method 
   # @param [Hash] opts the optional parameters
   # @option opts [Locale] :locale 
-  # @return [nil]
+  # @return [LiveApplicationWithSubmittedFields]
   describe 'show_live_application_payment_method test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -225,7 +225,7 @@ describe 'PlatformModelApi' do
   # Sub-merchant Detail
   # @param id 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [SerializedSubmerchant]
   describe 'show_merchant test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -238,7 +238,7 @@ describe 'PlatformModelApi' do
   # @param merchant_id 
   # @param currency 
   # @param [Hash] opts the optional parameters
-  # @return [Balance]
+  # @return [BalanceShow]
   describe 'show_merchant_balance test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -260,12 +260,12 @@ describe 'PlatformModelApi' do
 
   # unit tests for show_merchant_balance_transaction
   # Balance: Transaction
-  # Given a currency and a transaction UUID, view the corresponding ledger transaction of the currently authenticated merchant or one of its sub-merchants.
+  # Given a currency and a transaction UUID, view the corresponding ledger transaction of the currently authenticated merchant or one of its sub-merchants. Will return one entry per line item of the transaction.
   # @param merchant_id 
   # @param currency 
   # @param transaction_uuid 
   # @param [Hash] opts the optional parameters
-  # @return [Transaction]
+  # @return [Array<Transaction>]
   describe 'show_merchant_balance_transaction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -278,7 +278,7 @@ describe 'PlatformModelApi' do
   # @param merchant_id 
   # @param id 
   # @param [Hash] opts the optional parameters
-  # @return [Settlement]
+  # @return [SettlementShow]
   describe 'show_submerchant_settlement test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -292,7 +292,7 @@ describe 'PlatformModelApi' do
   # @param payment_method 
   # @param simulate_live_application_payment_method_status_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [PaymentMethodStatus]
   describe 'simulate_live_application_payment_method_status test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -301,11 +301,11 @@ describe 'PlatformModelApi' do
 
   # unit tests for simulate_live_application_status
   # Live Application: Simulate Status
-  # Simulate status change on applications for test merchants
+  # Simulate status change on applications for test merchants. In order for status to be changed to \&quot;accepted,\&quot; at least one payment method must be approved.
   # @param merchant_id 
   # @param simulate_live_application_payment_method_status_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [MerchantSubmissionStatus]
   describe 'simulate_live_application_status test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -357,7 +357,7 @@ describe 'PlatformModelApi' do
   # @param merchant_id 
   # @param live_application_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [LiveApplication]
   describe 'update_live_application test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -371,7 +371,7 @@ describe 'PlatformModelApi' do
   # @param payment_method 
   # @param update_payment_method_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [LiveApplication]
   describe 'update_live_application_payment_method test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -384,7 +384,7 @@ describe 'PlatformModelApi' do
   # @param id 
   # @param update_merchant_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [SerializedSubmerchant]
   describe 'update_merchant test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -23,7 +23,7 @@ Cancels a disbursement.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -95,7 +95,7 @@ Creates a new disbursement.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -165,7 +165,7 @@ View disbursements in CSV format.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -240,7 +240,7 @@ Lists disbursements.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -251,7 +251,7 @@ end
 api_instance = Komoju::DisbursementsApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56, # Integer | Page number to query for.
   currency: Komoju::Currency::JPY # Currency | 
@@ -289,7 +289,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 | **currency** | [**Currency**](.md) |  | [optional] |
@@ -320,7 +320,7 @@ Retrieves a disbursement.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key

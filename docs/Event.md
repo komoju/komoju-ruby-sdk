@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  |  |
+| **id** | **String** | A unique 25-character alphanumeric resource identifier. |  |
 | **type** | **String** |  |  |
 | **resource** | **String** |  |  |
 | **created_at** | **Time** |  |  |
@@ -14,7 +14,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::Event.new(
   id: null,

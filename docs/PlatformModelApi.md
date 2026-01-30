@@ -44,7 +44,7 @@ Balance: Transfer
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -116,7 +116,7 @@ Creates a new file for the current merchant.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -126,7 +126,7 @@ end
 
 api_instance = Komoju::PlatformModelApi.new
 merchant_id = 'merchant_id_example' # String | 
-create_file_request = Komoju::CreateFileRequest.new({merchant_id: 'merchant_id_example'}) # CreateFileRequest | 
+create_file_request = Komoju::CreateFileRequest.new({paper: 'paper_example'}) # CreateFileRequest | 
 
 begin
   # File: Create
@@ -178,7 +178,7 @@ end
 
 ## create_merchant
 
-> create_merchant(create_merchant_request)
+> <SerializedSubmerchant> create_merchant(create_merchant_request)
 
 Merchant: Create
 
@@ -188,7 +188,7 @@ Creates a new merchant.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -201,7 +201,8 @@ create_merchant_request = Komoju::CreateMerchantRequest.new({name: 'name_example
 
 begin
   # Merchant: Create
-  api_instance.create_merchant(create_merchant_request)
+  result = api_instance.create_merchant(create_merchant_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->create_merchant: #{e}"
 end
@@ -209,9 +210,9 @@ end
 
 #### Using the create_merchant_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> create_merchant_with_http_info(create_merchant_request)
+> <Array(<SerializedSubmerchant>, Integer, Hash)> create_merchant_with_http_info(create_merchant_request)
 
 ```ruby
 begin
@@ -219,7 +220,7 @@ begin
   data, status_code, headers = api_instance.create_merchant_with_http_info(create_merchant_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <SerializedSubmerchant>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->create_merchant_with_http_info: #{e}"
 end
@@ -233,7 +234,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**SerializedSubmerchant**](SerializedSubmerchant.md)
 
 ### Authorization
 
@@ -242,12 +243,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## create_merchant_balance_transfer
 
-> create_merchant_balance_transfer(merchant_id, currency, create_merchant_balance_transfer_request)
+> <BalanceTransferServiceRecord> create_merchant_balance_transfer(merchant_id, currency, create_merchant_balance_transfer_request)
 
 Balance: Transfer
 
@@ -257,7 +258,7 @@ Creates a balance transfer between associated merchants for a given `amount` and
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -272,7 +273,8 @@ create_merchant_balance_transfer_request = Komoju::CreateMerchantBalanceTransfer
 
 begin
   # Balance: Transfer
-  api_instance.create_merchant_balance_transfer(merchant_id, currency, create_merchant_balance_transfer_request)
+  result = api_instance.create_merchant_balance_transfer(merchant_id, currency, create_merchant_balance_transfer_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->create_merchant_balance_transfer: #{e}"
 end
@@ -280,9 +282,9 @@ end
 
 #### Using the create_merchant_balance_transfer_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> create_merchant_balance_transfer_with_http_info(merchant_id, currency, create_merchant_balance_transfer_request)
+> <Array(<BalanceTransferServiceRecord>, Integer, Hash)> create_merchant_balance_transfer_with_http_info(merchant_id, currency, create_merchant_balance_transfer_request)
 
 ```ruby
 begin
@@ -290,7 +292,7 @@ begin
   data, status_code, headers = api_instance.create_merchant_balance_transfer_with_http_info(merchant_id, currency, create_merchant_balance_transfer_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <BalanceTransferServiceRecord>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->create_merchant_balance_transfer_with_http_info: #{e}"
 end
@@ -306,7 +308,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**BalanceTransferServiceRecord**](BalanceTransferServiceRecord.md)
 
 ### Authorization
 
@@ -320,7 +322,7 @@ nil (empty response body)
 
 ## edit_merchant_balance_settings
 
-> edit_merchant_balance_settings(merchant_id, currency, edit_merchant_balance_settings_request)
+> <MerchantBalance> edit_merchant_balance_settings(merchant_id, currency, edit_merchant_balance_settings_request)
 
 Balances: Edit Settings
 
@@ -330,7 +332,7 @@ Given a currency, edit the payout settings of the currently authenticated mercha
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -345,7 +347,8 @@ edit_merchant_balance_settings_request = Komoju::EditMerchantBalanceSettingsRequ
 
 begin
   # Balances: Edit Settings
-  api_instance.edit_merchant_balance_settings(merchant_id, currency, edit_merchant_balance_settings_request)
+  result = api_instance.edit_merchant_balance_settings(merchant_id, currency, edit_merchant_balance_settings_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->edit_merchant_balance_settings: #{e}"
 end
@@ -353,9 +356,9 @@ end
 
 #### Using the edit_merchant_balance_settings_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> edit_merchant_balance_settings_with_http_info(merchant_id, currency, edit_merchant_balance_settings_request)
+> <Array(<MerchantBalance>, Integer, Hash)> edit_merchant_balance_settings_with_http_info(merchant_id, currency, edit_merchant_balance_settings_request)
 
 ```ruby
 begin
@@ -363,7 +366,7 @@ begin
   data, status_code, headers = api_instance.edit_merchant_balance_settings_with_http_info(merchant_id, currency, edit_merchant_balance_settings_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <MerchantBalance>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->edit_merchant_balance_settings_with_http_info: #{e}"
 end
@@ -379,7 +382,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**MerchantBalance**](MerchantBalance.md)
 
 ### Authorization
 
@@ -388,12 +391,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## list_live_application_payment_methods
 
-> list_live_application_payment_methods(merchant_id, opts)
+> <PaymentMethodsList> list_live_application_payment_methods(merchant_id, opts)
 
 Live Application: Payment Methods
 
@@ -403,7 +406,7 @@ List submitted/unsubmitted payment methods
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -419,7 +422,8 @@ opts = {
 
 begin
   # Live Application: Payment Methods
-  api_instance.list_live_application_payment_methods(merchant_id, opts)
+  result = api_instance.list_live_application_payment_methods(merchant_id, opts)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->list_live_application_payment_methods: #{e}"
 end
@@ -427,9 +431,9 @@ end
 
 #### Using the list_live_application_payment_methods_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> list_live_application_payment_methods_with_http_info(merchant_id, opts)
+> <Array(<PaymentMethodsList>, Integer, Hash)> list_live_application_payment_methods_with_http_info(merchant_id, opts)
 
 ```ruby
 begin
@@ -437,7 +441,7 @@ begin
   data, status_code, headers = api_instance.list_live_application_payment_methods_with_http_info(merchant_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <PaymentMethodsList>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->list_live_application_payment_methods_with_http_info: #{e}"
 end
@@ -452,7 +456,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**PaymentMethodsList**](PaymentMethodsList.md)
 
 ### Authorization
 
@@ -461,12 +465,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## list_merchants
 
-> list_merchants(opts)
+> <SubmerchantsList> list_merchants(opts)
 
 Merchant: List
 
@@ -476,7 +480,7 @@ Sub-merchants List
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -487,19 +491,20 @@ end
 api_instance = Komoju::PlatformModelApi.new
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56, # Integer | Page number to query for.
   live: true, # Boolean | 
   platform_role: Komoju::MerchantRole::SELLER, # MerchantRole | 
-  application_status: 'application_status_example', # String | 
+  status: 'status_example', # String | 
   payments_enabled: true, # Boolean | 
   payouts_enabled: true # Boolean | 
 }
 
 begin
   # Merchant: List
-  api_instance.list_merchants(opts)
+  result = api_instance.list_merchants(opts)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->list_merchants: #{e}"
 end
@@ -507,9 +512,9 @@ end
 
 #### Using the list_merchants_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> list_merchants_with_http_info(opts)
+> <Array(<SubmerchantsList>, Integer, Hash)> list_merchants_with_http_info(opts)
 
 ```ruby
 begin
@@ -517,7 +522,7 @@ begin
   data, status_code, headers = api_instance.list_merchants_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <SubmerchantsList>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->list_merchants_with_http_info: #{e}"
 end
@@ -528,18 +533,18 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 | **live** | **Boolean** |  | [optional] |
 | **platform_role** | [**MerchantRole**](.md) |  | [optional] |
-| **application_status** | **String** |  | [optional] |
+| **status** | **String** |  | [optional] |
 | **payments_enabled** | **Boolean** |  | [optional] |
 | **payouts_enabled** | **Boolean** |  | [optional] |
 
 ### Return type
 
-nil (empty response body)
+[**SubmerchantsList**](SubmerchantsList.md)
 
 ### Authorization
 
@@ -548,12 +553,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## list_submerchant_payments
 
-> list_submerchant_payments(merchant_id, opts)
+> <PlatformMerchantPaymentList> list_submerchant_payments(merchant_id, opts)
 
 Payment: List for Merchant
 
@@ -563,7 +568,7 @@ Retrieves a paginated list of payments. Pagination can be configured with `page`
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -575,7 +580,7 @@ api_instance = Komoju::PlatformModelApi.new
 merchant_id = 'merchant_id_example' # String | 
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56, # Integer | Page number to query for.
   currency: Komoju::Currency::JPY, # Currency | 
@@ -585,7 +590,8 @@ opts = {
 
 begin
   # Payment: List for Merchant
-  api_instance.list_submerchant_payments(merchant_id, opts)
+  result = api_instance.list_submerchant_payments(merchant_id, opts)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->list_submerchant_payments: #{e}"
 end
@@ -593,9 +599,9 @@ end
 
 #### Using the list_submerchant_payments_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> list_submerchant_payments_with_http_info(merchant_id, opts)
+> <Array(<PlatformMerchantPaymentList>, Integer, Hash)> list_submerchant_payments_with_http_info(merchant_id, opts)
 
 ```ruby
 begin
@@ -603,7 +609,7 @@ begin
   data, status_code, headers = api_instance.list_submerchant_payments_with_http_info(merchant_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <PlatformMerchantPaymentList>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->list_submerchant_payments_with_http_info: #{e}"
 end
@@ -615,7 +621,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **merchant_id** | **String** |  |  |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 | **currency** | [**Currency**](.md) |  | [optional] |
@@ -624,7 +630,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**PlatformMerchantPaymentList**](PlatformMerchantPaymentList.md)
 
 ### Authorization
 
@@ -633,7 +639,7 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## list_submerchant_settlements
@@ -648,7 +654,7 @@ Lists out past settlements from most-recent to least-recent.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -712,13 +718,13 @@ end
 
 Balance: Transactions
 
-Given a currency, view the ledger transactions of the currently authenticated merchant or one of its sub-merchants.
+Given a currency, view the ledger transactions of the currently authenticated merchant or one of its sub-merchants. Will split ledger transactions into line items when appropriate.
 
 ### Examples
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -731,7 +737,7 @@ merchant_id = 'merchant_id_example' # String |
 currency = Komoju::Currency::JPY # Currency | 
 opts = {
   start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created after this time.
-  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records before after this time.
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Query for records created before this time.
   per_page: 56, # Integer | How many objects per page.
   page: 56, # Integer | Page number to query for.
   type: 'type_example' # String | 
@@ -771,7 +777,7 @@ end
 | **merchant_id** | **String** |  |  |
 | **currency** | [**Currency**](.md) |  |  |
 | **start_time** | **Time** | Query for records created after this time. | [optional] |
-| **end_time** | **Time** | Query for records before after this time. | [optional] |
+| **end_time** | **Time** | Query for records created before this time. | [optional] |
 | **per_page** | **Integer** | How many objects per page. | [optional] |
 | **page** | **Integer** | Page number to query for. | [optional] |
 | **type** | **String** |  | [optional] |
@@ -802,7 +808,7 @@ Retrieves an existing file of the current merchant.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -864,7 +870,7 @@ end
 
 ## show_live_application
 
-> <LiveApplication> show_live_application(merchant_id, opts)
+> <LiveApplicationWithSubmittedFields> show_live_application(merchant_id, opts)
 
 Live Application: Show
 
@@ -874,7 +880,7 @@ Shows the live application status of the applicant merchant
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -901,7 +907,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<LiveApplication>, Integer, Hash)> show_live_application_with_http_info(merchant_id, opts)
+> <Array(<LiveApplicationWithSubmittedFields>, Integer, Hash)> show_live_application_with_http_info(merchant_id, opts)
 
 ```ruby
 begin
@@ -909,7 +915,7 @@ begin
   data, status_code, headers = api_instance.show_live_application_with_http_info(merchant_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <LiveApplication>
+  p data # => <LiveApplicationWithSubmittedFields>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_live_application_with_http_info: #{e}"
 end
@@ -924,7 +930,7 @@ end
 
 ### Return type
 
-[**LiveApplication**](LiveApplication.md)
+[**LiveApplicationWithSubmittedFields**](LiveApplicationWithSubmittedFields.md)
 
 ### Authorization
 
@@ -938,7 +944,7 @@ end
 
 ## show_live_application_payment_method
 
-> show_live_application_payment_method(merchant_id, payment_method, opts)
+> <LiveApplicationWithSubmittedFields> show_live_application_payment_method(merchant_id, payment_method, opts)
 
 Live Application: Show Payment Method
 
@@ -948,7 +954,7 @@ Shows the payment method status of the applicant merchant
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -965,7 +971,8 @@ opts = {
 
 begin
   # Live Application: Show Payment Method
-  api_instance.show_live_application_payment_method(merchant_id, payment_method, opts)
+  result = api_instance.show_live_application_payment_method(merchant_id, payment_method, opts)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_live_application_payment_method: #{e}"
 end
@@ -973,9 +980,9 @@ end
 
 #### Using the show_live_application_payment_method_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> show_live_application_payment_method_with_http_info(merchant_id, payment_method, opts)
+> <Array(<LiveApplicationWithSubmittedFields>, Integer, Hash)> show_live_application_payment_method_with_http_info(merchant_id, payment_method, opts)
 
 ```ruby
 begin
@@ -983,7 +990,7 @@ begin
   data, status_code, headers = api_instance.show_live_application_payment_method_with_http_info(merchant_id, payment_method, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <LiveApplicationWithSubmittedFields>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_live_application_payment_method_with_http_info: #{e}"
 end
@@ -999,7 +1006,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**LiveApplicationWithSubmittedFields**](LiveApplicationWithSubmittedFields.md)
 
 ### Authorization
 
@@ -1008,12 +1015,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## show_merchant
 
-> show_merchant(id)
+> <SerializedSubmerchant> show_merchant(id)
 
 Merchant: Show
 
@@ -1023,7 +1030,7 @@ Sub-merchant Detail
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1036,7 +1043,8 @@ id = 'id_example' # String |
 
 begin
   # Merchant: Show
-  api_instance.show_merchant(id)
+  result = api_instance.show_merchant(id)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_merchant: #{e}"
 end
@@ -1044,9 +1052,9 @@ end
 
 #### Using the show_merchant_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> show_merchant_with_http_info(id)
+> <Array(<SerializedSubmerchant>, Integer, Hash)> show_merchant_with_http_info(id)
 
 ```ruby
 begin
@@ -1054,7 +1062,7 @@ begin
   data, status_code, headers = api_instance.show_merchant_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <SerializedSubmerchant>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_merchant_with_http_info: #{e}"
 end
@@ -1068,7 +1076,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**SerializedSubmerchant**](SerializedSubmerchant.md)
 
 ### Authorization
 
@@ -1077,12 +1085,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## show_merchant_balance
 
-> <Balance> show_merchant_balance(merchant_id, currency)
+> <BalanceShow> show_merchant_balance(merchant_id, currency)
 
 Balance: Show
 
@@ -1092,7 +1100,7 @@ Given a currency, view the unsettled balance of the currently authenticated merc
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1117,7 +1125,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Balance>, Integer, Hash)> show_merchant_balance_with_http_info(merchant_id, currency)
+> <Array(<BalanceShow>, Integer, Hash)> show_merchant_balance_with_http_info(merchant_id, currency)
 
 ```ruby
 begin
@@ -1125,7 +1133,7 @@ begin
   data, status_code, headers = api_instance.show_merchant_balance_with_http_info(merchant_id, currency)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Balance>
+  p data # => <BalanceShow>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_merchant_balance_with_http_info: #{e}"
 end
@@ -1140,7 +1148,7 @@ end
 
 ### Return type
 
-[**Balance**](Balance.md)
+[**BalanceShow**](BalanceShow.md)
 
 ### Authorization
 
@@ -1164,7 +1172,7 @@ Given a currency, view the payout settings of the currently authenticated mercha
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1226,17 +1234,17 @@ end
 
 ## show_merchant_balance_transaction
 
-> <Transaction> show_merchant_balance_transaction(merchant_id, currency, transaction_uuid)
+> <Array<Transaction>> show_merchant_balance_transaction(merchant_id, currency, transaction_uuid)
 
 Balance: Transaction
 
-Given a currency and a transaction UUID, view the corresponding ledger transaction of the currently authenticated merchant or one of its sub-merchants.
+Given a currency and a transaction UUID, view the corresponding ledger transaction of the currently authenticated merchant or one of its sub-merchants. Will return one entry per line item of the transaction.
 
 ### Examples
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1262,7 +1270,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Transaction>, Integer, Hash)> show_merchant_balance_transaction_with_http_info(merchant_id, currency, transaction_uuid)
+> <Array(<Array<Transaction>>, Integer, Hash)> show_merchant_balance_transaction_with_http_info(merchant_id, currency, transaction_uuid)
 
 ```ruby
 begin
@@ -1270,7 +1278,7 @@ begin
   data, status_code, headers = api_instance.show_merchant_balance_transaction_with_http_info(merchant_id, currency, transaction_uuid)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Transaction>
+  p data # => <Array<Transaction>>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_merchant_balance_transaction_with_http_info: #{e}"
 end
@@ -1286,7 +1294,7 @@ end
 
 ### Return type
 
-[**Transaction**](Transaction.md)
+[**Array&lt;Transaction&gt;**](Transaction.md)
 
 ### Authorization
 
@@ -1300,7 +1308,7 @@ end
 
 ## show_submerchant_settlement
 
-> <Settlement> show_submerchant_settlement(merchant_id, id)
+> <SettlementShow> show_submerchant_settlement(merchant_id, id)
 
 Settlement: Show
 
@@ -1310,7 +1318,7 @@ View a settlement given an `id`.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1335,7 +1343,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Settlement>, Integer, Hash)> show_submerchant_settlement_with_http_info(merchant_id, id)
+> <Array(<SettlementShow>, Integer, Hash)> show_submerchant_settlement_with_http_info(merchant_id, id)
 
 ```ruby
 begin
@@ -1343,7 +1351,7 @@ begin
   data, status_code, headers = api_instance.show_submerchant_settlement_with_http_info(merchant_id, id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Settlement>
+  p data # => <SettlementShow>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_submerchant_settlement_with_http_info: #{e}"
 end
@@ -1358,7 +1366,7 @@ end
 
 ### Return type
 
-[**Settlement**](Settlement.md)
+[**SettlementShow**](SettlementShow.md)
 
 ### Authorization
 
@@ -1372,7 +1380,7 @@ end
 
 ## simulate_live_application_payment_method_status
 
-> simulate_live_application_payment_method_status(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
+> <PaymentMethodStatus> simulate_live_application_payment_method_status(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
 
 Live Application: Simulate Payment Method Status
 
@@ -1382,7 +1390,7 @@ Simulate status change on payment method for test merchants
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1397,7 +1405,8 @@ simulate_live_application_payment_method_status_request = Komoju::SimulateLiveAp
 
 begin
   # Live Application: Simulate Payment Method Status
-  api_instance.simulate_live_application_payment_method_status(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
+  result = api_instance.simulate_live_application_payment_method_status(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->simulate_live_application_payment_method_status: #{e}"
 end
@@ -1405,9 +1414,9 @@ end
 
 #### Using the simulate_live_application_payment_method_status_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> simulate_live_application_payment_method_status_with_http_info(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
+> <Array(<PaymentMethodStatus>, Integer, Hash)> simulate_live_application_payment_method_status_with_http_info(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
 
 ```ruby
 begin
@@ -1415,7 +1424,7 @@ begin
   data, status_code, headers = api_instance.simulate_live_application_payment_method_status_with_http_info(merchant_id, payment_method, simulate_live_application_payment_method_status_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <PaymentMethodStatus>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->simulate_live_application_payment_method_status_with_http_info: #{e}"
 end
@@ -1431,7 +1440,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**PaymentMethodStatus**](PaymentMethodStatus.md)
 
 ### Authorization
 
@@ -1440,22 +1449,22 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## simulate_live_application_status
 
-> simulate_live_application_status(merchant_id, simulate_live_application_payment_method_status_request)
+> <MerchantSubmissionStatus> simulate_live_application_status(merchant_id, simulate_live_application_payment_method_status_request)
 
 Live Application: Simulate Status
 
-Simulate status change on applications for test merchants
+Simulate status change on applications for test merchants. In order for status to be changed to \"accepted,\" at least one payment method must be approved.
 
 ### Examples
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1469,7 +1478,8 @@ simulate_live_application_payment_method_status_request = Komoju::SimulateLiveAp
 
 begin
   # Live Application: Simulate Status
-  api_instance.simulate_live_application_status(merchant_id, simulate_live_application_payment_method_status_request)
+  result = api_instance.simulate_live_application_status(merchant_id, simulate_live_application_payment_method_status_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->simulate_live_application_status: #{e}"
 end
@@ -1477,9 +1487,9 @@ end
 
 #### Using the simulate_live_application_status_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> simulate_live_application_status_with_http_info(merchant_id, simulate_live_application_payment_method_status_request)
+> <Array(<MerchantSubmissionStatus>, Integer, Hash)> simulate_live_application_status_with_http_info(merchant_id, simulate_live_application_payment_method_status_request)
 
 ```ruby
 begin
@@ -1487,7 +1497,7 @@ begin
   data, status_code, headers = api_instance.simulate_live_application_status_with_http_info(merchant_id, simulate_live_application_payment_method_status_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <MerchantSubmissionStatus>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->simulate_live_application_status_with_http_info: #{e}"
 end
@@ -1502,7 +1512,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**MerchantSubmissionStatus**](MerchantSubmissionStatus.md)
 
 ### Authorization
 
@@ -1511,7 +1521,7 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## submerchant_settlement_csv
@@ -1526,7 +1536,7 @@ View a settlement in CSV format given an `id`.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1597,7 +1607,7 @@ View a settlement in PDF format given an `id`.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1668,7 +1678,7 @@ View a settlement in XLS format given an `id`.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1729,7 +1739,7 @@ nil (empty response body)
 
 ## update_live_application
 
-> update_live_application(merchant_id, live_application_request)
+> <LiveApplication> update_live_application(merchant_id, live_application_request)
 
 Live Application: Update
 
@@ -1739,7 +1749,7 @@ Updates the live application for the applicant merchant
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1753,7 +1763,8 @@ live_application_request = Komoju::LiveApplicationRequest.new # LiveApplicationR
 
 begin
   # Live Application: Update
-  api_instance.update_live_application(merchant_id, live_application_request)
+  result = api_instance.update_live_application(merchant_id, live_application_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_live_application: #{e}"
 end
@@ -1761,9 +1772,9 @@ end
 
 #### Using the update_live_application_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> update_live_application_with_http_info(merchant_id, live_application_request)
+> <Array(<LiveApplication>, Integer, Hash)> update_live_application_with_http_info(merchant_id, live_application_request)
 
 ```ruby
 begin
@@ -1771,7 +1782,7 @@ begin
   data, status_code, headers = api_instance.update_live_application_with_http_info(merchant_id, live_application_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <LiveApplication>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_live_application_with_http_info: #{e}"
 end
@@ -1786,7 +1797,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**LiveApplication**](LiveApplication.md)
 
 ### Authorization
 
@@ -1795,12 +1806,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## update_live_application_payment_method
 
-> update_live_application_payment_method(merchant_id, payment_method, update_payment_method_request)
+> <LiveApplication> update_live_application_payment_method(merchant_id, payment_method, update_payment_method_request)
 
 Live Application: Update Payment Method
 
@@ -1810,7 +1821,7 @@ Update the payment method application of the applicant merchant
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1825,7 +1836,8 @@ update_payment_method_request = Komoju::UpdatePaymentMethodRequest.new # UpdateP
 
 begin
   # Live Application: Update Payment Method
-  api_instance.update_live_application_payment_method(merchant_id, payment_method, update_payment_method_request)
+  result = api_instance.update_live_application_payment_method(merchant_id, payment_method, update_payment_method_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_live_application_payment_method: #{e}"
 end
@@ -1833,9 +1845,9 @@ end
 
 #### Using the update_live_application_payment_method_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> update_live_application_payment_method_with_http_info(merchant_id, payment_method, update_payment_method_request)
+> <Array(<LiveApplication>, Integer, Hash)> update_live_application_payment_method_with_http_info(merchant_id, payment_method, update_payment_method_request)
 
 ```ruby
 begin
@@ -1843,7 +1855,7 @@ begin
   data, status_code, headers = api_instance.update_live_application_payment_method_with_http_info(merchant_id, payment_method, update_payment_method_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <LiveApplication>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_live_application_payment_method_with_http_info: #{e}"
 end
@@ -1859,7 +1871,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**LiveApplication**](LiveApplication.md)
 
 ### Authorization
 
@@ -1868,12 +1880,12 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## update_merchant
 
-> update_merchant(id, update_merchant_request)
+> <SerializedSubmerchant> update_merchant(id, update_merchant_request)
 
 Merchant: Update
 
@@ -1883,7 +1895,7 @@ Updates merchant.
 
 ```ruby
 require 'time'
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 # setup authorization
 Komoju.configure do |config|
   # Configure HTTP basic authorization: api_key
@@ -1897,7 +1909,8 @@ update_merchant_request = Komoju::UpdateMerchantRequest.new # UpdateMerchantRequ
 
 begin
   # Merchant: Update
-  api_instance.update_merchant(id, update_merchant_request)
+  result = api_instance.update_merchant(id, update_merchant_request)
+  p result
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_merchant: #{e}"
 end
@@ -1905,9 +1918,9 @@ end
 
 #### Using the update_merchant_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> update_merchant_with_http_info(id, update_merchant_request)
+> <Array(<SerializedSubmerchant>, Integer, Hash)> update_merchant_with_http_info(id, update_merchant_request)
 
 ```ruby
 begin
@@ -1915,7 +1928,7 @@ begin
   data, status_code, headers = api_instance.update_merchant_with_http_info(id, update_merchant_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <SerializedSubmerchant>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_merchant_with_http_info: #{e}"
 end
@@ -1930,7 +1943,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**SerializedSubmerchant**](SerializedSubmerchant.md)
 
 ### Authorization
 
@@ -1939,5 +1952,5 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 

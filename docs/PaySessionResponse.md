@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::PaySessionResponse.new(
   redirect_url: null,

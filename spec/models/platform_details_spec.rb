@@ -27,13 +27,13 @@ describe Komoju::PlatformDetails do
     end
   end
 
-  describe 'test attribute "processing_merchant_id"' do
+  describe 'test attribute "submerchants"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
-  describe 'test attribute "submerchants"' do
+  describe 'test attribute "processing_merchant_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

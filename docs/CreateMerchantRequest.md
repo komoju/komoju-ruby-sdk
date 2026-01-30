@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'komoju-ruby-client'
+require 'komoju-ruby-sdk'
 
 instance = Komoju::CreateMerchantRequest.new(
   name: null,
