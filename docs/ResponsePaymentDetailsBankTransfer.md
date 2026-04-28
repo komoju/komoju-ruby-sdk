@@ -1,0 +1,64 @@
+# Komoju::ResponsePaymentDetailsBankTransfer
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **type** | **String** | Payment method type. |  |
+| **email** | **String** | Customer&#39;s email address. Will be used for fraud prevention, payment instruction, and payment receipt. |  |
+| **order_id** | **String** | Order identifier for this bank transfer. | [optional] |
+| **bank_name** | **String** | Name of the bank to transfer funds to. | [optional] |
+| **account_branch_name** | **String** | Name of the bank branch. | [optional] |
+| **account_number** | **String** | Bank account number to transfer funds to. | [optional] |
+| **account_type** | **String** | Type of bank account. | [optional] |
+| **account_name** | **String** | Name of the bank account holder. | [optional] |
+| **instructions_url** | **String** | URL with payment instructions for the customer. | [optional] |
+| **payment_deadline** | **Time** | Deadline by which the bank transfer must be completed. | [optional] |
+| **shipping_address_name** | **String** | Shipping address name. This is the recipient&#39;s name. | [optional] |
+| **shipping_address_line1** | **String** | Shipping address line 1. | [optional] |
+| **shipping_address_line2** | **String** | Shipping address line 2. | [optional] |
+| **shipping_address_city** | **String** | Shipping address city. | [optional] |
+| **shipping_address_state** | **String** | Shipping address state. | [optional] |
+| **shipping_address_zip** | **String** | Shipping address ZIP code. | [optional] |
+| **shipping_address_country** | **String** | Shipping address country. | [optional] |
+| **billing_address_name** | **String** | Billing address name. This is the paying customer&#39;s name. | [optional] |
+| **billing_address_line1** | **String** | Billing address line 1. | [optional] |
+| **billing_address_line2** | **String** | Billing address line 2. | [optional] |
+| **billing_address_city** | **String** | Billing address city. | [optional] |
+| **billing_address_state** | **String** | Billing address state. | [optional] |
+| **billing_address_zip** | **String** | Billing address ZIP code. | [optional] |
+| **billing_address_country** | **String** | Billing address country. | [optional] |
+
+## Example
+
+```ruby
+require 'komoju-ruby-sdk'
+
+instance = Komoju::ResponsePaymentDetailsBankTransfer.new(
+  type: null,
+  email: example@komoju.com,
+  order_id: null,
+  bank_name: null,
+  account_branch_name: null,
+  account_number: null,
+  account_type: null,
+  account_name: null,
+  instructions_url: null,
+  payment_deadline: null,
+  shipping_address_name: Taro Tanaka,
+  shipping_address_line1: 5-2-1 Ginza,
+  shipping_address_line2: 3rd floor,
+  shipping_address_city: Chuo-ku,
+  shipping_address_state: Tokyo,
+  shipping_address_zip: 170-3293,
+  shipping_address_country: Japan,
+  billing_address_name: Taro Tanaka,
+  billing_address_line1: 5-2-1 Ginza,
+  billing_address_line2: 3rd floor,
+  billing_address_city: Chuo-ku,
+  billing_address_state: Tokyo,
+  billing_address_zip: 170-3293,
+  billing_address_country: Japan
+)
+```
+
