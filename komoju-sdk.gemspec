@@ -28,9 +28,9 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.7"
   s.metadata    = {}
 
-  s.add_runtime_dependency 'faraday', '>= 1.0.1', '< 3.0'
-  s.add_runtime_dependency 'faraday-multipart'
-  s.add_runtime_dependency 'marcel'
+  s.add_runtime_dependency 'faraday', '>= 2.14.2', '< 3.0'
+  s.add_runtime_dependency 'faraday-multipart', '~> 1.0'
+  s.add_runtime_dependency 'marcel', '~> 1.0'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
