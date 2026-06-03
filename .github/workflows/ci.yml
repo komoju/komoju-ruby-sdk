@@ -1,14 +1,12 @@
 name: Validate
 
 on:
-  push:
-    branches: [main]
   pull_request:
     types: [opened, reopened, synchronize]
 
 jobs:
   validate:
-    runs-on: [self-hosted, spot]
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
