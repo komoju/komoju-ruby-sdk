@@ -11,5 +11,5 @@ Generator version: 7.9.0
 =end
 
 module Komoju
-  VERSION = '1.0.0.beta.1'
+  VERSION = '1.0.0.beta.2'
 end

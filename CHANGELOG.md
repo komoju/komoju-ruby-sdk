@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.0.beta.2] - 2026-06-11
+
+No changes. Release to verify CI runner configuration.
+
 ## [1.0.0.beta.1] - 2026-05-25
 
 Targets KOMOJU API version `2025-01-28`.
