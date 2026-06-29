@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **mode** | **String** | In &#x60;customer_payment&#x60; mode, a payment will be created and:  * If &#x60;customer_id&#x60; is omitted, a new customer will be created. * If &#x60;customer_id&#x60; is given, updated payment information will be saved to that customer. |  |
+| **amount** | **Integer** | Amount greater than 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
 | **return_url** | **String** | Specify the URL where user will be redirected to after they have completed or aborted the session. A &#x60;session_id&#x60; will be appended to this URL as a query parameter. | [optional] |
-| **amount** | **Integer** | Amount greater than or equal to 0, in the lowest denomination of the currency (e.g. cents for USD). |  |
 | **currency** | [**Currency**](Currency.md) |  |  |
 | **email** | **String** | Customer&#39;s email address. | [optional] |
 | **expires_in_seconds** | **Integer** | Time in seconds until the session expires after being created.  The default value and upper limit are 86,400 seconds (24 hours). | [optional] |
@@ -25,8 +25,8 @@ require 'komoju-sdk'
 
 instance = Komoju::CreateSessionRequestWithCustomerPaymentMode.new(
   mode: null,
-  return_url: https://example.com/order/complete,
   amount: 1000,
+  return_url: https://example.com/order/complete,
   currency: null,
   email: john@example.com,
   expires_in_seconds: 86400,

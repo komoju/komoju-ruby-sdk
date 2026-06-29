@@ -104,7 +104,7 @@ Komoju.configure do |config|
 end
 
 api_instance = Komoju::SessionsApi.new
-create_session_request = Komoju::CreateSessionRequestWithCustomerMode.new({mode: 'customer', amount: 1000, currency: Komoju::Currency::JPY}) # CreateSessionRequest | 
+create_session_request = Komoju::CreateSessionRequestWithCustomerMode.new({mode: 'customer', currency: Komoju::Currency::JPY}) # CreateSessionRequest | 
 
 begin
   # Session: Create

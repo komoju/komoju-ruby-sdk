@@ -28,37 +28,6 @@ Komoju::CreateSessionRequest.openapi_one_of
 # ]
 ```
 
-### `openapi_discriminator_name`
-
-Returns the discriminator's property name.
-
-#### Example
-
-```ruby
-require 'komoju-sdk'
-
-Komoju::CreateSessionRequest.openapi_discriminator_name
-# => :'mode'
-```
-
-### `openapi_discriminator_name`
-
-Returns the discriminator's mapping.
-
-#### Example
-
-```ruby
-require 'komoju-sdk'
-
-Komoju::CreateSessionRequest.openapi_discriminator_mapping
-# =>
-# {
-#   :'customer' => :'CreateSessionRequestWithCustomerMode',
-#   :'customer_payment' => :'CreateSessionRequestWithCustomerPaymentMode',
-#   :'payment' => :'CreateSessionRequestWithPaymentMode'
-# }
-```
-
 ### build
 
 Find the appropriate object from the `openapi_one_of` list and casts the data into it.

@@ -19,7 +19,7 @@
 | **created_at** | **Time** | Timestamp when the subscription was created. |  |
 | **ended_at** | **Time** | Timestamp when the subscription ended, or null if still active. |  |
 | **metadata** | **Object** | Arbitrary key-value metadata attached to the subscription. |  |
-| **payments** | **Array&lt;Object&gt;** | Array of payment objects associated with this subscription. |  |
+| **payments** | **Array&lt;String&gt;** | Array of payment UUIDs associated with this subscription. |  |
 
 ## Example
 

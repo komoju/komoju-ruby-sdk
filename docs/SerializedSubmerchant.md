@@ -14,10 +14,10 @@
 | **status** | **String** | Current account/application status of the merchant. |  |
 | **payments_enabled** | **Boolean** | Whether payments are currently enabled for this merchant. |  |
 | **payouts_enabled** | **Boolean** | Whether payouts are currently enabled for this merchant. |  |
-| **send_payment_instruction_email** | **Boolean** | Whether payment instruction emails are sent to customers for this merchant. |  |
-| **send_payment_receipt_email** | **Boolean** | Whether payment receipt emails are sent to customers for this merchant. |  |
-| **send_payment_reminder_email** | **Boolean** | Whether payment reminder emails are sent to customers for this merchant. |  |
-| **send_payment_refund_email** | **Boolean** | Whether refund notification emails are sent to customers for this merchant. |  |
+| **send_payment_instruction_email** | **Boolean** | Whether payment instruction emails are sent to customers for this merchant. Omitted for &#x60;payout&#x60;-role merchants. | [optional] |
+| **send_payment_receipt_email** | **Boolean** | Whether payment receipt emails are sent to customers for this merchant. Omitted for &#x60;payout&#x60;-role merchants. | [optional] |
+| **send_payment_reminder_email** | **Boolean** | Whether payment reminder emails are sent to customers for this merchant. Omitted for &#x60;payout&#x60;-role merchants. | [optional] |
+| **send_payment_refund_email** | **Boolean** | Whether refund notification emails are sent to customers for this merchant. Omitted for &#x60;payout&#x60;-role merchants. | [optional] |
 | **expiry_settings** | [**Array&lt;SerializedSubmerchantExpirySettingsInner&gt;**](SerializedSubmerchantExpirySettingsInner.md) |  |  |
 | **active_payment_methods** | [**Array&lt;SerializedSubmerchantActivePaymentMethodsInner&gt;**](SerializedSubmerchantActivePaymentMethodsInner.md) |  |  |
 | **publishable_key** | **String** | The merchant&#39;s publishable API key for client-side use. |  |
