@@ -1,13 +1,15 @@
 # komoju-sdk
 
-Ruby gem for the KOMOJU API — Full featured access to the KOMOJU payments system.
+The KOMOJU Ruby SDK is a full-featured gem for the KOMOJU Payments API. It works with any Ruby application or framework, including Rails.
+
+For a full reference of all available endpoints and models, see the [KOMOJU API Reference](https://doc.komoju.com/reference/getting-started).
 
 ## Installation
 
 Add to your Gemfile:
 
 ```ruby
-gem 'komoju-sdk', '~> 1.0.0.beta.1'
+gem 'komoju-sdk', '~> 1.0.0'
 ```
 
 Then run `bundle install`.
@@ -25,59 +27,60 @@ end
 
 Get your API keys from the [KOMOJU Merchant Settings](https://komoju.com/merchant/settings).
 
-### Accept a Payment
+## Example: Hosted Page Payment
 
-Charge a customer directly with their payment details:
+The following example walks through a basic hosted page payment flow. For a full guide, see the [Hosted Page Integration Guide](https://doc.komoju.com/docs/hosted-page-integration-guide).
 
-```ruby
-payments_api = Komoju::PaymentsApi.new
+### 1. Creating a Session
 
-begin
-  payment = payments_api.create_payment(
-    Komoju::CreatePaymentRequestWithPaymentDetails.new(
-      amount: 1000,
-      currency: 'JPY',
-      payment_details: {
-        type: 'credit_card',
-        number: '4111111111111111',
-        month: 12,
-        year: 2025,
-        verification_value: '123'
-      }
-    )
-  )
-  puts "Payment created: #{payment.id} (#{payment.status})"
-
-  # Capture an authorized payment
-  captured = payments_api.capture_payment(payment.id, Komoju::CapturePaymentRequest.new)
-  puts "Payment captured: #{captured.captured_at}"
-rescue Komoju::ApiError => e
-  puts "Error #{e.code}: #{e.message}"
-end
-```
-
-### Hosted Payment Page (Sessions)
-
-Redirect customers to a KOMOJU-hosted checkout page:
+When your customer is ready to pay, create a session and redirect them to the returned `session_url`.
 
 ```ruby
 sessions_api = Komoju::SessionsApi.new
 
-begin
-  session = sessions_api.create_session(
-    Komoju::CreateSessionRequestWithPaymentMode.new(
-      mode: 'payment',
-      amount: 5000,
-      currency: 'JPY',
-      return_url: 'https://example.com/thank-you',
-      default_locale: 'ja'
-    )
+session = sessions_api.create_session(
+  Komoju::CreateSessionRequestWithPaymentMode.new(
+    mode: 'payment',
+    amount: 1000,
+    currency: 'JPY',
+    return_url: 'https://your-site.com/orders/return'
   )
-  puts "Redirect customer to: #{session.session_url}"
-rescue Komoju::ApiError => e
-  puts "Error #{e.code}: #{e.message}"
+)
+
+redirect_to session.session_url, allow_other_host: true
+```
+
+### 2. Handling the Return URL
+
+After the customer pays, KOMOJU redirects them back to your `return_url` with a `session_id` query param appended:
+
+```
+https://your-site.com/orders/return?session_id=xxxxx
+```
+
+Fetch the session to check the outcome:
+
+```ruby
+sessions_api = Komoju::SessionsApi.new
+komoju_session = sessions_api.show_session(params[:session_id])
+
+if komoju_session.status == Komoju::SessionStatus::COMPLETED
+  # payment.status will be "captured", "authorized", or "pending"
+  puts "Payment #{komoju_session.payment.status}"
+else
+  puts "Payment was cancelled or failed"
 end
 ```
+
+### 3. Set Up Webhooks (Recommended)
+
+It is possible that the redirect in step 2 fails, possibly due to the user closing their browser, network issues, etc. Or, that the capture will only take place later on, such as with Convenience Store payments. To account for this, we recommend setting up a [Webhook](https://doc.komoju.com/docs/webhooks) to listen for payment events such as `payment.captured`, `payment.authorized`, and `payment.cancelled`. Configure your webhook URL in the [KOMOJU Merchant Dashboard](https://komoju.com/merchant/settings).
+
+#### Verifying Webhook Signatures
+
+To ensure a webhook request genuinely came from KOMOJU, set a **secret token** when creating or updating the webhook. KOMOJU then signs every delivery with a SHA-256 HMAC of the raw request body in the `X-Komoju-Signature` header, which you can recompute and verify.
+
+See [Webhooks → Secret Token](https://doc.komoju.com/docs/webhooks#secret-token) for the full explanation and code examples.
 
 ## Error Handling
 
@@ -101,6 +104,10 @@ All URIs are relative to *https://komoju.com/api/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *Komoju::BarcodesApi* | [**show_barcode**](docs/BarcodesApi.md#show_barcode) | **GET** /barcodes/{payment_id} | Barcode: Show
+*Komoju::ChargebacksApi* | [**accept_chargeback_request**](docs/ChargebacksApi.md#accept_chargeback_request) | **POST** /chargeback_requests/{id}/accept | Chargeback: Accept
+*Komoju::ChargebacksApi* | [**defend_chargeback_request**](docs/ChargebacksApi.md#defend_chargeback_request) | **POST** /chargeback_requests/{id}/defend | Chargeback: Defend
+*Komoju::ChargebacksApi* | [**list_chargeback_requests**](docs/ChargebacksApi.md#list_chargeback_requests) | **GET** /chargeback_requests | Chargeback: List
+*Komoju::ChargebacksApi* | [**show_chargeback_request**](docs/ChargebacksApi.md#show_chargeback_request) | **GET** /chargeback_requests/{id} | Chargeback: Show
 *Komoju::DisbursementsApi* | [**cancel_disbursement**](docs/DisbursementsApi.md#cancel_disbursement) | **POST** /disbursements/{id}/cancel | Disbursement: Cancel
 *Komoju::DisbursementsApi* | [**create_disbursement**](docs/DisbursementsApi.md#create_disbursement) | **POST** /disbursements | Disbursement: Create
 *Komoju::DisbursementsApi* | [**disbursement_report**](docs/DisbursementsApi.md#disbursement_report) | **GET** /disbursements/report | Disbursement: Report
@@ -123,7 +130,7 @@ Class | Method | HTTP request | Description
 *Komoju::PlatformModelApi* | [**create_file**](docs/PlatformModelApi.md#create_file) | **POST** /merchants/{merchant_id}/files | File: Create
 *Komoju::PlatformModelApi* | [**create_merchant**](docs/PlatformModelApi.md#create_merchant) | **POST** /merchants | Merchant: Create
 *Komoju::PlatformModelApi* | [**create_merchant_balance_transfer**](docs/PlatformModelApi.md#create_merchant_balance_transfer) | **POST** /merchants/{merchant_id}/balances/{currency}/transfer | Balance: Transfer
-*Komoju::PlatformModelApi* | [**edit_merchant_balance_settings**](docs/PlatformModelApi.md#edit_merchant_balance_settings) | **PATCH** /merchants/{merchant_id}/balances/{currency}/settings | Balances: Edit Settings
+*Komoju::PlatformModelApi* | [**edit_merchant_balance_settings**](docs/PlatformModelApi.md#edit_merchant_balance_settings) | **PUT** /merchants/{merchant_id}/balances/{currency}/settings | Balances: Edit Settings
 *Komoju::PlatformModelApi* | [**list_live_application_payment_methods**](docs/PlatformModelApi.md#list_live_application_payment_methods) | **GET** /live_application/{merchant_id}/payment_methods | Live Application: Payment Methods
 *Komoju::PlatformModelApi* | [**list_merchants**](docs/PlatformModelApi.md#list_merchants) | **GET** /merchants | Merchant: List
 *Komoju::PlatformModelApi* | [**list_submerchant_payments**](docs/PlatformModelApi.md#list_submerchant_payments) | **GET** /merchants/{merchant_id}/payments | Payment: List for Merchant
@@ -151,7 +158,9 @@ Class | Method | HTTP request | Description
 *Komoju::SessionsApi* | [**create_session**](docs/SessionsApi.md#create_session) | **POST** /sessions | Session: Create
 *Komoju::SessionsApi* | [**pay_session**](docs/SessionsApi.md#pay_session) | **POST** /sessions/{id}/pay | Session: Pay
 *Komoju::SessionsApi* | [**show_session**](docs/SessionsApi.md#show_session) | **GET** /sessions/{id} | Session: Show
+*Komoju::SettlementsApi* | [**balance_transactions**](docs/SettlementsApi.md#balance_transactions) | **GET** /balances/{currency}/transactions | Balance: Transactions
 *Komoju::SettlementsApi* | [**list_settlements**](docs/SettlementsApi.md#list_settlements) | **GET** /settlements | Settlement: Index
+*Komoju::SettlementsApi* | [**show_balance**](docs/SettlementsApi.md#show_balance) | **GET** /balances/{currency} | Balance: Show
 *Komoju::SettlementsApi* | [**show_settlement**](docs/SettlementsApi.md#show_settlement) | **GET** /settlements/{id} | Settlement: Show
 *Komoju::SettlementsApi* | [**show_settlement_csv**](docs/SettlementsApi.md#show_settlement_csv) | **GET** /settlements/{id}/csv | Settlement: CSV
 *Komoju::SettlementsApi* | [**show_settlement_pdf**](docs/SettlementsApi.md#show_settlement_pdf) | **GET** /settlements/{id}/pdf | Settlement: PDF
@@ -186,7 +195,18 @@ Class | Method | HTTP request | Description
  - [Komoju::BarcodeReadyResponse](docs/BarcodeReadyResponse.md)
  - [Komoju::CancelDisbursementRequest](docs/CancelDisbursementRequest.md)
  - [Komoju::CapturePaymentRequest](docs/CapturePaymentRequest.md)
- - [Komoju::CapturePaymentRequestTax](docs/CapturePaymentRequestTax.md)
+ - [Komoju::ChargebackCustomer](docs/ChargebackCustomer.md)
+ - [Komoju::ChargebackDefense](docs/ChargebackDefense.md)
+ - [Komoju::ChargebackDefenseDocument](docs/ChargebackDefenseDocument.md)
+ - [Komoju::ChargebackDefenseRecipientInfo](docs/ChargebackDefenseRecipientInfo.md)
+ - [Komoju::ChargebackDefenseShippingInfo](docs/ChargebackDefenseShippingInfo.md)
+ - [Komoju::ChargebackPayment](docs/ChargebackPayment.md)
+ - [Komoju::ChargebackPaymentMethod](docs/ChargebackPaymentMethod.md)
+ - [Komoju::ChargebackRequestDetail](docs/ChargebackRequestDetail.md)
+ - [Komoju::ChargebackRequestList](docs/ChargebackRequestList.md)
+ - [Komoju::ChargebackRequestListItem](docs/ChargebackRequestListItem.md)
+ - [Komoju::ChargebackStatus](docs/ChargebackStatus.md)
+ - [Komoju::ChargebackTimelineEntry](docs/ChargebackTimelineEntry.md)
  - [Komoju::CountryCode](docs/CountryCode.md)
  - [Komoju::CreateCustomerRequest](docs/CreateCustomerRequest.md)
  - [Komoju::CreateDisbursementRequest](docs/CreateDisbursementRequest.md)
@@ -210,9 +230,12 @@ Class | Method | HTTP request | Description
  - [Komoju::Currency](docs/Currency.md)
  - [Komoju::Customer](docs/Customer.md)
  - [Komoju::CustomerList](docs/CustomerList.md)
- - [Komoju::CustomerMetadata](docs/CustomerMetadata.md)
  - [Komoju::CustomerSource](docs/CustomerSource.md)
- - [Komoju::DeleteExternalCustomerResponse](docs/DeleteExternalCustomerResponse.md)
+ - [Komoju::DefendChargebackDocument](docs/DefendChargebackDocument.md)
+ - [Komoju::DefendChargebackRecipientInfo](docs/DefendChargebackRecipientInfo.md)
+ - [Komoju::DefendChargebackRequestBody](docs/DefendChargebackRequestBody.md)
+ - [Komoju::DefendChargebackShippingInfo](docs/DefendChargebackShippingInfo.md)
+ - [Komoju::DeleteExternalCustomer200Response](docs/DeleteExternalCustomer200Response.md)
  - [Komoju::Disbursement](docs/Disbursement.md)
  - [Komoju::DisbursementList](docs/DisbursementList.md)
  - [Komoju::DisbursementStatus](docs/DisbursementStatus.md)
@@ -309,6 +332,9 @@ Class | Method | HTTP request | Description
  - [Komoju::PaymentDetailsWechatpay](docs/PaymentDetailsWechatpay.md)
  - [Komoju::PaymentList](docs/PaymentList.md)
  - [Komoju::PaymentMethod](docs/PaymentMethod.md)
+ - [Komoju::PaymentMethodApplication](docs/PaymentMethodApplication.md)
+ - [Komoju::PaymentMethodApplicationStatus](docs/PaymentMethodApplicationStatus.md)
+ - [Komoju::PaymentMethodApplicationWithSubmittedFields](docs/PaymentMethodApplicationWithSubmittedFields.md)
  - [Komoju::PaymentMethodBrands](docs/PaymentMethodBrands.md)
  - [Komoju::PaymentMethodInstallmentsInner](docs/PaymentMethodInstallmentsInner.md)
  - [Komoju::PaymentMethodStatus](docs/PaymentMethodStatus.md)
@@ -387,6 +413,7 @@ Class | Method | HTTP request | Description
  - [Komoju::ResponsePaymentDetailsWebMoney](docs/ResponsePaymentDetailsWebMoney.md)
  - [Komoju::ResponsePaymentDetailsWechatpay](docs/ResponsePaymentDetailsWechatpay.md)
  - [Komoju::SecureToken](docs/SecureToken.md)
+ - [Komoju::SecureTokenThreeDSecureAccount](docs/SecureTokenThreeDSecureAccount.md)
  - [Komoju::SerializedSubmerchant](docs/SerializedSubmerchant.md)
  - [Komoju::SerializedSubmerchantActivePaymentMethodsInner](docs/SerializedSubmerchantActivePaymentMethodsInner.md)
  - [Komoju::SerializedSubmerchantExpirySettingsInner](docs/SerializedSubmerchantExpirySettingsInner.md)
@@ -405,6 +432,7 @@ Class | Method | HTTP request | Description
  - [Komoju::SharedDetailsPayments](docs/SharedDetailsPayments.md)
  - [Komoju::SharedDetailsPlatformModel](docs/SharedDetailsPlatformModel.md)
  - [Komoju::SharedDetailsRefunds](docs/SharedDetailsRefunds.md)
+ - [Komoju::ShowBalance200Response](docs/ShowBalance200Response.md)
  - [Komoju::ShowBarcodeResponse](docs/ShowBarcodeResponse.md)
  - [Komoju::SimulateLiveApplicationPaymentMethodStatusRequest](docs/SimulateLiveApplicationPaymentMethodStatusRequest.md)
  - [Komoju::StatementDescriptor](docs/StatementDescriptor.md)

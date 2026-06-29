@@ -8,7 +8,7 @@ All URIs are relative to *https://komoju.com/api/v1*
 | [**create_file**](PlatformModelApi.md#create_file) | **POST** /merchants/{merchant_id}/files | File: Create |
 | [**create_merchant**](PlatformModelApi.md#create_merchant) | **POST** /merchants | Merchant: Create |
 | [**create_merchant_balance_transfer**](PlatformModelApi.md#create_merchant_balance_transfer) | **POST** /merchants/{merchant_id}/balances/{currency}/transfer | Balance: Transfer |
-| [**edit_merchant_balance_settings**](PlatformModelApi.md#edit_merchant_balance_settings) | **PATCH** /merchants/{merchant_id}/balances/{currency}/settings | Balances: Edit Settings |
+| [**edit_merchant_balance_settings**](PlatformModelApi.md#edit_merchant_balance_settings) | **PUT** /merchants/{merchant_id}/balances/{currency}/settings | Balances: Edit Settings |
 | [**list_live_application_payment_methods**](PlatformModelApi.md#list_live_application_payment_methods) | **GET** /live_application/{merchant_id}/payment_methods | Live Application: Payment Methods |
 | [**list_merchants**](PlatformModelApi.md#list_merchants) | **GET** /merchants | Merchant: List |
 | [**list_submerchant_payments**](PlatformModelApi.md#list_submerchant_payments) | **GET** /merchants/{merchant_id}/payments | Payment: List for Merchant |
@@ -945,7 +945,7 @@ end
 
 ## show_live_application_payment_method
 
-> <LiveApplicationWithSubmittedFields> show_live_application_payment_method(merchant_id, payment_method, opts)
+> <PaymentMethodApplicationWithSubmittedFields> show_live_application_payment_method(merchant_id, payment_method, opts)
 
 Live Application: Show Payment Method
 
@@ -982,7 +982,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<LiveApplicationWithSubmittedFields>, Integer, Hash)> show_live_application_payment_method_with_http_info(merchant_id, payment_method, opts)
+> <Array(<PaymentMethodApplicationWithSubmittedFields>, Integer, Hash)> show_live_application_payment_method_with_http_info(merchant_id, payment_method, opts)
 
 ```ruby
 begin
@@ -990,7 +990,7 @@ begin
   data, status_code, headers = api_instance.show_live_application_payment_method_with_http_info(merchant_id, payment_method, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <LiveApplicationWithSubmittedFields>
+  p data # => <PaymentMethodApplicationWithSubmittedFields>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->show_live_application_payment_method_with_http_info: #{e}"
 end
@@ -1006,7 +1006,7 @@ end
 
 ### Return type
 
-[**LiveApplicationWithSubmittedFields**](LiveApplicationWithSubmittedFields.md)
+[**PaymentMethodApplicationWithSubmittedFields**](PaymentMethodApplicationWithSubmittedFields.md)
 
 ### Authorization
 
@@ -1800,7 +1800,7 @@ end
 
 ## update_live_application_payment_method
 
-> <LiveApplication> update_live_application_payment_method(merchant_id, payment_method, update_payment_method_request)
+> <PaymentMethodApplication> update_live_application_payment_method(merchant_id, payment_method, update_payment_method_request)
 
 Live Application: Update Payment Method
 
@@ -1835,7 +1835,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<LiveApplication>, Integer, Hash)> update_live_application_payment_method_with_http_info(merchant_id, payment_method, update_payment_method_request)
+> <Array(<PaymentMethodApplication>, Integer, Hash)> update_live_application_payment_method_with_http_info(merchant_id, payment_method, update_payment_method_request)
 
 ```ruby
 begin
@@ -1843,7 +1843,7 @@ begin
   data, status_code, headers = api_instance.update_live_application_payment_method_with_http_info(merchant_id, payment_method, update_payment_method_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <LiveApplication>
+  p data # => <PaymentMethodApplication>
 rescue Komoju::ApiError => e
   puts "Error when calling PlatformModelApi->update_live_application_payment_method_with_http_info: #{e}"
 end
@@ -1859,7 +1859,7 @@ end
 
 ### Return type
 
-[**LiveApplication**](LiveApplication.md)
+[**PaymentMethodApplication**](PaymentMethodApplication.md)
 
 ### Authorization
 

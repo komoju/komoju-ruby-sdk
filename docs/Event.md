@@ -8,7 +8,7 @@
 | **type** | **String** | Event type slug (e.g. \&quot;payment.captured\&quot;, \&quot;payment.expired\&quot;). |  |
 | **resource** | **String** | Resource type name, always \&quot;event\&quot;. |  |
 | **created_at** | **Time** | Timestamp when this event was created. |  |
-| **reason** | **String** | Human-readable reason or description for this event. |  |
+| **reason** | **String** | Human-readable reason or description for this event, or null. |  |
 | **data** | [**Payment**](Payment.md) |  |  |
 
 ## Example

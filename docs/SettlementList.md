@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **resource** | **String** | Resource type name, always \&quot;settlement_list\&quot;. |  |
+| **resource** | **String** | Resource type name for this list, always \&quot;list\&quot;. |  |
 | **data** | [**Array&lt;Settlement&gt;**](Settlement.md) | Array of settlement objects for this page. |  |
 | **start_time** | **Time** | Start of the time range for records in this response. |  |
 | **end_time** | **Time** | End of the time range for records in this response. |  |

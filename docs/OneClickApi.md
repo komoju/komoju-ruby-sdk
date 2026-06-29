@@ -12,7 +12,7 @@ All URIs are relative to *https://komoju.com/api/v1*
 
 ## delete_external_customer
 
-> <DeleteExternalCustomerResponse> delete_external_customer(id)
+> <DeleteExternalCustomer200Response> delete_external_customer(id)
 
 External Customer: Destroy
 
@@ -45,7 +45,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteExternalCustomerResponse>, Integer, Hash)> delete_external_customer_with_http_info(id)
+> <Array(<DeleteExternalCustomer200Response>, Integer, Hash)> delete_external_customer_with_http_info(id)
 
 ```ruby
 begin
@@ -53,7 +53,7 @@ begin
   data, status_code, headers = api_instance.delete_external_customer_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <DeleteExternalCustomerResponse>
+  p data # => <DeleteExternalCustomer200Response>
 rescue Komoju::ApiError => e
   puts "Error when calling OneClickApi->delete_external_customer_with_http_info: #{e}"
 end
@@ -67,7 +67,7 @@ end
 
 ### Return type
 
-[**DeleteExternalCustomerResponse**](DeleteExternalCustomerResponse.md)
+[**DeleteExternalCustomer200Response**](DeleteExternalCustomer200Response.md)
 
 ### Authorization
 

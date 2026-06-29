@@ -23,11 +23,6 @@ Fetches the latest barcode for a konbini payment.  Barcodes can be displayed in 
 ```ruby
 require 'time'
 require 'komoju-sdk'
-# setup authorization
-Komoju.configure do |config|
-  # Configure your KOMOJU API key
-  config.api_key = 'YOUR_API_KEY'
-end
 
 api_instance = Komoju::BarcodesApi.new
 payment_id = 'payment_id_example' # String | Payment unique identifier
@@ -71,7 +66,7 @@ end
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 

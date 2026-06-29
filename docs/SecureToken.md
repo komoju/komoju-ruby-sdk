@@ -7,7 +7,8 @@
 | **id** | **String** | A unique 25-character alphanumeric resource identifier. |  |
 | **created_at** | **Time** | Timestamp when the SecureToken was created. |  |
 | **verification_status** | **String** | Current 3DS verification status of this SecureToken. |  |
-| **authentication_url** | **String** | URL to redirect the customer to for 3DS authentication. |  |
+| **authentication_url** | **String** | URL to redirect the customer to for 3DS authentication. Only present when verification_status is \&quot;NEEDS_VERIFY\&quot;. | [optional] |
+| **three_d_secure_account** | [**SecureTokenThreeDSecureAccount**](SecureTokenThreeDSecureAccount.md) |  | [optional] |
 | **three_ds_auth_result** | [**ThreeDsAuthResult**](ThreeDsAuthResult.md) |  | [optional] |
 
 ## Example
@@ -20,6 +21,7 @@ instance = Komoju::SecureToken.new(
   created_at: null,
   verification_status: null,
   authentication_url: null,
+  three_d_secure_account: null,
   three_ds_auth_result: null
 )
 ```
