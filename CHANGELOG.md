@@ -2,6 +2,23 @@
 
 ## [Unreleased]
 
+### Dependency and security maintenance
+
+- **`faraday` floor raised to `>= 2.15.1` (still `< 3.0`).** `CVE-2026-54297` (uncontrolled recursion in
+  `NestedParamsEncoder`, DoS) affects `faraday` `>= 2.0.0` and `<= 2.14.2`; the previous `>= 2.14.2` floor
+  allowed resolving to a vulnerable version. `2.15.1` is the current in-major patch release.
+- **`required_ruby_version` aligned to `>= 3.0`.** Every `faraday` release at or above the previous floor
+  already declared `required_ruby_version >= 3.0`, so Ruby 2.7 was never actually satisfiable. This records
+  the effective, pre-existing floor rather than introducing a new restriction for existing users.
+- `faraday-multipart` raised from `~> 1.0` to `~> 1.2` (latest in-major is 1.2.0).
+- `marcel` raised from `~> 1.0` to `~> 1.2` (latest in 1.x is 1.2.1; `marcel` 2.x requires Ruby `>= 3.3` and is
+  intentionally not adopted).
+- `rspec` development dependency narrowed to `~> 3.13`.
+- `rake` development dependency raised from `~> 13.0.1` to `~> 13.4`; `pry-byebug` and `rubocop` are unchanged.
+- GitHub Actions: `actions/checkout` `v6.0.2` -> `v7.0.1`, `ruby/setup-ruby` `v1.310.0` -> `v1.338.0`,
+  `rubygems/configure-rubygems-credentials` `v2.0.0` -> `v2.1.0`, `actions/upload-artifact` `v7.0.1` -> `v7.0.2`.
+  CI still targets Ruby 3.2 on the existing self-hosted runners; no release behaviour changed.
+
 ## [1.0.0] - 2026-06-29
 
 Targets KOMOJU API version `2025-01-28`.

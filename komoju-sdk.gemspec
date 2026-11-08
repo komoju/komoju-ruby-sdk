@@ -24,14 +24,14 @@ Gem::Specification.new do |s|
   s.summary     = "KOMOJU API Ruby Gem"
   s.description = "Full featured access to the KOMOJU payments system."
   s.license     = "MIT"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.0"
   s.metadata    = {}
 
-  s.add_runtime_dependency 'faraday', '>= 2.14.2', '< 3.0'
-  s.add_runtime_dependency 'faraday-multipart', '~> 1.0'
-  s.add_runtime_dependency 'marcel', '~> 1.0'
+  s.add_runtime_dependency 'faraday', '>= 2.15.1', '< 3.0'
+  s.add_runtime_dependency 'faraday-multipart', '~> 1.2'
+  s.add_runtime_dependency 'marcel', '~> 1.2'
 
-  s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
+  s.add_development_dependency 'rspec', '~> 3.13'
 
   s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? }
   s.test_files    = `find spec/*`.split("\n")
