@@ -17,7 +17,11 @@
 - `rake` development dependency raised from `~> 13.0.1` to `~> 13.4`; `pry-byebug` and `rubocop` are unchanged.
 - GitHub Actions: `actions/checkout` `v6.0.2` -> `v7.0.1`, `ruby/setup-ruby` `v1.310.0` -> `v1.338.0`,
   `rubygems/configure-rubygems-credentials` `v2.0.0` -> `v2.1.0`, `actions/upload-artifact` `v7.0.1` -> `v7.0.2`.
-  CI still targets Ruby 3.2 on the existing self-hosted runners; no release behaviour changed.
+  CI still targets Ruby 3.2; no release behaviour changed.
+- CI runners: `[self-hosted, beta, public-release]` -> `ubuntu-latest` in `ci.yml` and both `release.yml` jobs.
+  This repository is public, and self-hosted runners must not be used for public repositories. Job
+  permissions, the OIDC trusted-publishing configuration, `gem build`/`gem push` steps and the release
+  trigger are unchanged; only the runner label differs.
 
 ## [1.0.0] - 2026-06-29
 
