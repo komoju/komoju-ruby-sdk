@@ -9,10 +9,6 @@
 - `rubygems/configure-rubygems-credentials` `v2.0.0` -> `v2.1.0`.
 - `actions/upload-artifact` `v7.0.1` -> `v7.0.2`.
 
-No change to the gem's public API, its runtime dependencies or the Ruby versions it supports. CI still
-targets Ruby 3.2, and both workflows continue to run on the repository's existing
-`[self-hosted, beta, public-release]` runners — only the action versions above changed.
-
 ## [1.0.0] - 2026-06-29
 
 Targets KOMOJU API version `2025-01-28`.
